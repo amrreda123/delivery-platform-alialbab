@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مسودة مشروع "على الباب" | Ala El-Bab Scratchpad</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap');
+        
+        :root {
+            --primary: #FFB800;
+            --primary-hover: #E5A500;
+            --secondary: #1E293B;
+            --bg-main: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+            --success: #10B981;
+            --code-bg: #1E1E1E;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary) 0%, #0F172A 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 100%;
+            background: var(--primary);
+            transform: skewX(-25deg) translateX(-50px);
+            opacity: 0.15;
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-title span {
+            color: var(--primary);
+        }
+
+        .header-desc {
+            color: #94A3B8;
+            font-size: 15px;
+        }
+
+        .progress-bar-container {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: var(--primary);
+            height: 100%;
+            width: 45%;
+            transition: width 0.3s ease;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-full {
+            grid-column: 1 / -1;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title-badge {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .badge-backend { background: #EEF2FF; color: #4F46E5; }
+        .badge-frontend { background: #ECFDF5; color: #059669; }
+        .badge-tools { background: #FFF7ED; color: #EA580C; }
+        .badge-infra { background: #F5F3FF; color: #7C3AED; }
+        .badge-commands { background: #E2E8F0; color: #334155; }
+
+        .tech-list {
+            list-style: none;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .tech-item:hover {
+            background: #F8FAFC;
+        }
+
+        .checkbox {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #CBD5E1;
+            border-radius: 6px;
+            outline: none;
+            cursor: pointer;
+            display: grid;
+            place-content: center;
+            position: relative;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .checkbox:checked {
+            background-color: var(--success);
+            border-color: var(--success);
+        }
+
+        .checkbox:checked::before {
+            content: "✓";
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .tech-info h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .tech-info p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .checked h4 {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            color: #E2E8F0;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            line-height: 1.8;
+        }
+
+        .code-comment {
+            color: #6A9955;
+        }
+
+        .log-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .log-timeline {
+            position: relative;
+            padding-right: 20px;
+            border-right: 2px solid var(--border);
+            margin-top: 20px;
+        }
+
+        .log-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .log-item::before {
+            content: '';
+            position: absolute;
+            right: -27px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid var(--card-bg);
+        }
+
+        .log-date {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .log-content h5 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 4px 0;
+        }
+
+        .log-content p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-title">مشروع منصة <span>"على الباب"</span> للتوصيل</div>
+            <div class="header-desc">المسودة الديناميكية ومتابعة التطور البرمجي للهيكل الأساسي (Architecture Blueprint)</div>
+            <div style="margin-top: 15px; font-size: 13px; color: #CBD5E1;">نسبة إنجاز البيئة الأساسية: 45%</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+        </header>
+
+        <!-- Tech Stack Grid -->
+        <div class="grid">
+            <!-- Backend -->
+            <div class="card">
+                <div class="card-title">
+                    الباك إند (Backend)
+                    <span class="card-title-badge badge-backend">PHP / Laravel</span>
+                </div>
+                <ul class="tech-list">
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox" checked disabled>
+                        <div class="tech-info checked">
+                            <h4>PHP 8.2 + Laravel 11</h4>
+                            <p>تثبيت هيكل المشروع والـ MVC الأساسي.</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox" checked disabled>
+                        <div class="tech-info checked">
+                            <h4>Laravel Sanctum</h4>
+                            <p>بناء وتأمين الـ APIs لتطبيق الموبايل.</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox" checked disabled>
+                        <div class="tech-info checked">
+                            <h4>Spatie Laravel Permission</h4>
+                            <p>إدارة الأدوار والصلاحيات (عميل، مندوب، مدير).</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox">
+                        <div class="tech-info">
+                            <h4>Laravel Mail + Queues</h4>
+                            <p>إرسال الإشعارات والإيميلات في الخلفية.</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox" checked disabled>
+                        <div class="tech-info checked">
+                            <h4>Intervention Image</h4>
+                            <p>معالجة وضغط صور المنتجات والمندوبين.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Frontend -->
+            <div class="card">
+                <div class="card-title">
+                    الفرونت إند (Frontend)
+                    <span class="card-title-badge badge-frontend">TALL Stack</span>
+                </div>
+                <ul class="tech-list">
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox" checked disabled>
+                        <div class="tech-info checked">
+                            <h4>Blade Templates</h4>
+                            <p>تم تركيب قالب الصفحة الرئيسية بنجاح.</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox" checked disabled>
+                        <div class="tech-info checked">
+                            <h4>Livewire 3</h4>
+                            <p>تم التثبيت وجاهز لبناء واجهات تفاعلية.</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox">
+                        <div class="tech-info">
+                            <h4>Alpine.js</h4>
+                            <p>إضافة التفاعلات البسيطة في المتصفح (Modals, Dropdowns).</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox" checked disabled>
+                        <div class="tech-info checked">
+                            <h4>Tailwind CSS</h4>
+                            <p>تم التثبيت والربط مع Vite و PostCSS.</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox">
+                        <div class="tech-info">
+                            <h4>Chart.js</h4>
+                            <p>رسم المخططات البيانية في لوحة التحكم (Dashboard).</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Infrastructure & DB -->
+            <div class="card">
+                <div class="card-title">
+                    البنية التحتية والبيانات
+                    <span class="card-title-badge badge-infra">Infra & Data</span>
+                </div>
+                <ul class="tech-list">
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox">
+                        <div class="tech-info">
+                            <h4>MySQL 8</h4>
+                            <p>قاعدة البيانات الأساسية (بانتظار بناء الجداول).</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox">
+                        <div class="tech-info">
+                            <h4>Redis</h4>
+                            <p>الكاش (Cache)، الجلسات (Sessions)، وإدارة الطوابير (Queues).</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox">
+                        <div class="tech-info">
+                            <h4>Laravel Storage</h4>
+                            <p>نظام إدارة الملفات والصور محلياً.</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox">
+                        <div class="tech-info">
+                            <h4>Cloudinary (CDN)</h4>
+                            <p>رفع وتحسين الصور سحابياً لتسريع التصفح (اختياري).</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Dev Tools -->
+            <div class="card">
+                <div class="card-title">
+                    أدوات التطوير والجودة
+                    <span class="card-title-badge badge-tools">Dev Experience</span>
+                </div>
+                <ul class="tech-list">
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox" checked disabled>
+                        <div class="tech-info checked">
+                            <h4>Laravel Telescope</h4>
+                            <p>تم التثبيت لمراقبة الطلبات والاستعلامات.</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox" checked disabled>
+                        <div class="tech-info checked">
+                            <h4>Pest PHP</h4>
+                            <p>تم التهيئة لكتابة الاختبارات المؤتمتة.</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox">
+                        <div class="tech-info">
+                            <h4>Laravel Pint</h4>
+                            <p>تنسيق الكود تلقائياً وتوحيد المعايير القياسية.</p>
+                        </div>
+                    </li>
+                    <li class="tech-item">
+                        <input type="checkbox" class="checkbox" checked disabled>
+                        <div class="tech-info checked">
+                            <h4>Laravel Debugbar</h4>
+                            <p>تم التثبيت لتحليل أداء الاستعلامات محلياً.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Terminal Commands Section -->
+            <div class="card card-full">
+                <div class="card-title">
+                    الأوامر المستخدمة (Terminal Commands Log)
+                    <span class="card-title-badge badge-commands">CLI History</span>
+                </div>
+                <div class="code-block">
+<span class="code-comment"># 1. إنشاء المشروع</span>
+composer create-project laravel/laravel ala-elbab
+cd ala-elbab
+
+<span class="code-comment"># 2. تثبيت حزم الباك إند الأساسية</span>
+composer require spatie/laravel-permission intervention/image
+php artisan install:api
+
+<span class="code-comment"># 3. تثبيت Livewire (الفرونت إند)</span>
+composer require livewire/livewire
+
+<span class="code-comment"># 4. تثبيت أدوات التطوير والاختبار</span>
+composer require pestphp/pest --dev --with-all-dependencies
+composer require laravel/telescope --dev
+composer require barryvdh/laravel-debugbar --dev
+
+<span class="code-comment"># 5. تهيئة أدوات التطوير</span>
+php artisan telescope:install
+composer require pestphp/pest-plugin-laravel --dev
+vendor in\pest --init
+
+<span class="code-comment"># 6. تثبيت وتهيئة Tailwind CSS</span>
+npm install -D tailwindcss postcss autoprefixer
+<span class="code-comment"># (تم إنشاء ملفات tailwind.config.js و postcss.config.js يدوياً)</span>
+
+<span class="code-comment"># 7. تشغيل بيئة التطوير</span>
+npm run dev
+php artisan serve
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Log -->
+        <div class="log-section">
+            <h3 style="font-size: 18px; font-weight: 700; color: var(--secondary);">سجل الإنجاز والتحديثات (Activity Log)</h3>
+            <div class="log-timeline">
+                <div class="log-item">
+                    <div class="log-date">التقدم الحالي</div>
+                    <div class="log-content">
+                        <h5>تثبيت الحزم وضبط الواجهة</h5>
+                        <p>تم تثبيت حزم الباك إند الأساسية وأدوات الـ TALL Stack وتهيئة Tailwind. تم أيضاً تجهيز وعرض تصميم الصفحة الرئيسية بنجاح.</p>
+                    </div>
+                </div>
+                <div class="log-item">
+                    <div class="log-date">المرحلة الأولى</div>
+                    <div class="log-content">
+                        <h5>تهيئة بيئة التطوير وتثبيت Laravel 11</h5>
+                        <p>إنشاء المشروع، وضبط الإعدادات الأساسية، وتجهيز ملف المسودة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
