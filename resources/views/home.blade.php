@@ -166,8 +166,8 @@
                 <!-- Number Box -->
                 <div class="bg-white/80 backdrop-blur-sm px-6 py-4 rounded-xl shadow-sm border border-red-100 w-full mb-3 flex items-center justify-between group-hover:border-red-300 transition-colors relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-r from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <span class="font-black text-2xl lg:text-3xl text-[#E60000] tracking-[0.1em] relative z-10 font-mono">{{ $cashSettings['vodafone_cash_number'] ?? '01060401725' }}</span>
-                    <button onclick="navigator.clipboard.writeText('{{ $cashSettings['vodafone_cash_number'] ?? '01060401725' }}')" class="text-red-300 hover:text-[#E60000] hover:bg-red-50 p-2 rounded-lg transition-all relative z-10" title="نسخ الرقم">
+                    <span class="font-black text-2xl lg:text-3xl text-[#E60000] tracking-[0.1em] relative z-10 font-mono" dir="ltr">{{ !empty($settings['vodafone_cash_number']) ? $settings['vodafone_cash_number'] : '01060401725' }}</span>
+                    <button onclick="navigator.clipboard.writeText('{{ !empty($settings['vodafone_cash_number']) ? $settings['vodafone_cash_number'] : '01060401725' }}')" class="text-red-300 hover:text-[#E60000] hover:bg-red-50 p-2 rounded-lg transition-all relative z-10" title="نسخ الرقم">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                     </button>
                 </div>
@@ -191,8 +191,8 @@
                 <!-- Number Box -->
                 <div class="bg-white/80 backdrop-blur-sm px-6 py-4 rounded-xl shadow-sm border border-green-100 w-full mb-3 flex items-center justify-between group-hover:border-[#73C044]/40 transition-colors relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-r from-[#73C044]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <span class="font-black text-2xl lg:text-3xl text-[#73C044] tracking-[0.1em] relative z-10 font-mono">{{ $cashSettings['etisalat_cash_number'] ?? '01130424003' }}</span>
-                    <button onclick="navigator.clipboard.writeText('{{ $cashSettings['etisalat_cash_number'] ?? '01130424003' }}')" class="text-green-300 hover:text-[#73C044] hover:bg-[#73C044]/10 p-2 rounded-lg transition-all relative z-10" title="نسخ الرقم">
+                    <span class="font-black text-2xl lg:text-3xl text-[#73C044] tracking-[0.1em] relative z-10 font-mono" dir="ltr">{{ !empty($settings['etisalat_cash_number']) ? $settings['etisalat_cash_number'] : '01130424003' }}</span>
+                    <button onclick="navigator.clipboard.writeText('{{ !empty($settings['etisalat_cash_number']) ? $settings['etisalat_cash_number'] : '01130424003' }}')" class="text-green-300 hover:text-[#73C044] hover:bg-[#73C044]/10 p-2 rounded-lg transition-all relative z-10" title="نسخ الرقم">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                     </button>
                 </div>

@@ -10,11 +10,8 @@ class HomeController extends Controller
 {
     public function home() {
         $categories = Category::where('is_active', true)->get();
-        $cashSettings = Setting::whereIn('key', ['vodafone_cash_number', 'etisalat_cash_number'])
-                           ->pluck('value', 'key')
-                           ->toArray();
 
-        return view('home', compact('categories','cashSettings'));
+        return view('home', compact('categories'));
     }
 
     public function services() {
@@ -31,7 +28,6 @@ class HomeController extends Controller
     }
 
     public function contact() {
-        $settings = Setting::pluck('value', 'key')->toArray();
-        return view('contact', compact('settings'));
+        return view('contact');
     }
 }
