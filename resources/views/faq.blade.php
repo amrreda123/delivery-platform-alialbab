@@ -12,16 +12,32 @@
         animation: ken-burns 20s ease-in-out infinite alternate;
     }
     
-    /* Hide default marker */
-    details > summary { list-style: none; outline: none; }
-    details > summary::-webkit-details-marker { display: none; }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
+    /* Smooth Accordion CSS Grid Hack */
+    .faq-content {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.4s ease-in-out;
     }
-    .animate-fade-in {
-        animation: fadeIn 0.4s ease-out forwards;
+    .faq-item.is-open .faq-content {
+        grid-template-rows: 1fr;
+    }
+    .faq-inner-text {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        transition-delay: 0s;
+    }
+    .faq-item.is-open .faq-inner-text {
+        opacity: 1;
+        transition-delay: 0.15s; /* Wait slightly for expansion before fading in text */
+    }
+    .faq-icon {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .faq-item.is-open .faq-icon {
+        transform: rotate(-180deg);
+        background-color: #FFC107 !important;
+        color: white !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
 </style>
 
@@ -55,101 +71,131 @@
         <!-- Central Tree Trunk -->
         <div class="hidden lg:block absolute top-0 left-1/2 transform -translate-x-1/2 w-[2px] h-full bg-gradient-to-b from-[#FFC107] via-yellow-300 to-transparent z-0 opacity-50"></div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-24 gap-y-8 lg:gap-y-0 relative z-10">
+        <div class="flex flex-col lg:flex-row justify-between relative z-10 gap-x-24">
             
-            <!-- Question 1 (Right Column) -->
-            <div class="relative group" data-aos="fade-up" data-aos-delay="100">
-                <!-- Branch connecting to center (Leftwards) -->
-                <div class="hidden lg:block absolute top-12 -left-12 w-12 h-[2px] bg-gradient-to-l from-transparent to-[#FFC107] opacity-50 group-hover:opacity-100 transition-all duration-500"></div>
-                <div class="hidden lg:block absolute top-12 -left-[54px] w-4 h-4 bg-white border-4 border-[#FFC107] rounded-full transform -translate-y-1/2 shadow-[0_0_10px_rgba(255,193,7,0.5)] z-10 group-hover:scale-150 transition-all duration-500"></div>
+            <!-- Right Column (Questions 1, 3, 5) -->
+            <div class="w-full lg:w-[calc(50%-3rem)] space-y-8 lg:space-y-12">
                 
-                <details name="faq" class="bg-white border border-gray-100 rounded-[32px] shadow-sm hover:shadow-xl transition-all duration-300 relative z-20">
-                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 md:p-8 text-[#0B1536] text-lg md:text-xl">
-                        <span>كم يستغرق توصيل الطلب؟</span>
-                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-50 text-[#FFC107] flex items-center justify-center transition-all duration-300 group-open:-rotate-180 group-open:bg-[#FFC107] group-open:text-white group-open:shadow-md">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                <!-- Question 1 -->
+                <div class="relative group" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Branch connecting to center (Leftwards) -->
+                    <div class="hidden lg:block absolute top-12 -left-12 w-12 h-[2px] bg-gradient-to-l from-transparent to-[#FFC107] opacity-50 group-hover:opacity-100 transition-all duration-500"></div>
+                    <div class="hidden lg:block absolute top-12 -left-[54px] w-4 h-4 bg-white border-4 border-[#FFC107] rounded-full transform -translate-y-1/2 shadow-[0_0_10px_rgba(255,193,7,0.5)] z-10 group-hover:scale-150 transition-all duration-500"></div>
+                    
+                    <div class="faq-item bg-white border border-gray-100 rounded-[32px] shadow-sm hover:shadow-xl transition-all duration-300 relative z-20">
+                        <button class="faq-button w-full flex justify-between items-center font-bold cursor-pointer p-6 md:p-8 text-[#0B1536] text-lg md:text-xl text-right">
+                            <span>كم يستغرق توصيل الطلب؟</span>
+                            <div class="faq-icon flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-50 text-[#FFC107] flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="overflow-hidden">
+                                <div class="faq-inner-text px-6 md:px-8 pb-8 pt-0 text-gray-500 leading-relaxed text-lg border-t border-gray-50 mt-2 pt-6">
+                                    نحرص في "علي الباب" على توصيل طلباتكم في أسرع وقت ممكن. عادة ما يتم التوصيل في نفس اليوم وخلال ساعات قليلة من تأكيد الطلب، وقد يختلف الوقت قليلاً بناءً على المسافة وظروف الطريق.
+                                </div>
+                            </div>
                         </div>
-                    </summary>
-                    <div class="px-6 md:px-8 pb-8 pt-0 text-gray-500 leading-relaxed text-lg animate-fade-in border-t border-gray-50 mt-2 pt-6">
-                        نحرص في "علي الباب" على توصيل طلباتكم في أسرع وقت ممكن. عادة ما يتم التوصيل في نفس اليوم وخلال ساعات قليلة من تأكيد الطلب، وقد يختلف الوقت قليلاً بناءً على المسافة وظروف الطريق.
                     </div>
-                </details>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="relative group" data-aos="fade-up" data-aos-delay="300">
+                    <!-- Branch connecting to center (Leftwards) -->
+                    <div class="hidden lg:block absolute top-12 -left-12 w-12 h-[2px] bg-gradient-to-l from-transparent to-[#FFC107] opacity-50 group-hover:opacity-100 transition-all duration-500"></div>
+                    <div class="hidden lg:block absolute top-12 -left-[54px] w-4 h-4 bg-white border-4 border-[#FFC107] rounded-full transform -translate-y-1/2 shadow-[0_0_10px_rgba(255,193,7,0.5)] z-10 group-hover:scale-150 transition-all duration-500"></div>
+                    
+                    <div class="faq-item bg-white border border-gray-100 rounded-[32px] shadow-sm hover:shadow-xl transition-all duration-300 relative z-20">
+                        <button class="faq-button w-full flex justify-between items-center font-bold cursor-pointer p-6 md:p-8 text-[#0B1536] text-lg md:text-xl text-right">
+                            <span>هل يمكنني تتبع حالة طلبي؟</span>
+                            <div class="faq-icon flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-50 text-[#FFC107] flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="overflow-hidden">
+                                <div class="faq-inner-text px-6 md:px-8 pb-8 pt-0 text-gray-500 leading-relaxed text-lg border-t border-gray-50 mt-2 pt-6">
+                                    بالتأكيد! بمجرد قبول المندوب لطلبك، سيظهر لك رقمه للتواصل معه مباشرة، وتقدر تتابع معاه خط سير طلبك لحد ما يوصل إلى باب بيتك بأمان.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="relative group" data-aos="fade-up" data-aos-delay="500">
+                    <!-- Branch connecting to center (Leftwards) -->
+                    <div class="hidden lg:block absolute top-12 -left-12 w-12 h-[2px] bg-gradient-to-l from-transparent to-[#FFC107] opacity-50 group-hover:opacity-100 transition-all duration-500"></div>
+                    <div class="hidden lg:block absolute top-12 -left-[54px] w-4 h-4 bg-white border-4 border-[#FFC107] rounded-full transform -translate-y-1/2 shadow-[0_0_10px_rgba(255,193,7,0.5)] z-10 group-hover:scale-150 transition-all duration-500"></div>
+                    
+                    <div class="faq-item bg-white border border-gray-100 rounded-[32px] shadow-sm hover:shadow-xl transition-all duration-300 relative z-20">
+                        <button class="faq-button w-full flex justify-between items-center font-bold cursor-pointer p-6 md:p-8 text-[#0B1536] text-lg md:text-xl text-right">
+                            <span>ماذا أفعل في حالة مشكلة بالطلب؟</span>
+                            <div class="faq-icon flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-50 text-[#FFC107] flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="overflow-hidden">
+                                <div class="faq-inner-text px-6 md:px-8 pb-8 pt-0 text-gray-500 leading-relaxed text-lg border-t border-gray-50 mt-2 pt-6">
+                                    رضاك هو أولويتنا. إذا واجهت أي مشكلة بخصوص الطلب أو التوصيل، يرجى التواصل معنا فوراً عبر صفحة "تواصل معنا" وسيقوم فريق الدعم الفني بحل مشكلتك وتعويضك في أسرع وقت.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Question 2 (Left Column) -->
-            <div class="relative group lg:mt-32" data-aos="fade-up" data-aos-delay="200">
-                <!-- Branch connecting to center (Rightwards) -->
-                <div class="hidden lg:block absolute top-12 -right-12 w-12 h-[2px] bg-gradient-to-r from-transparent to-[#FFC107] opacity-50 group-hover:opacity-100 transition-all duration-500"></div>
-                <div class="hidden lg:block absolute top-12 -right-[54px] w-4 h-4 bg-white border-4 border-[#FFC107] rounded-full transform -translate-y-1/2 shadow-[0_0_10px_rgba(255,193,7,0.5)] z-10 group-hover:scale-150 transition-all duration-500"></div>
+            <!-- Left Column (Questions 2, 4) -->
+            <div class="w-full lg:w-[calc(50%-3rem)] space-y-8 lg:space-y-12 lg:mt-16 mt-8">
                 
-                <details name="faq" class="bg-white border border-gray-100 rounded-[32px] shadow-sm hover:shadow-xl transition-all duration-300 relative z-20">
-                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 md:p-8 text-[#0B1536] text-lg md:text-xl">
-                        <span>ما هي مناطق التوصيل المتاحة؟</span>
-                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-50 text-[#FFC107] flex items-center justify-center transition-all duration-300 group-open:-rotate-180 group-open:bg-[#FFC107] group-open:text-white group-open:shadow-md">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                <!-- Question 2 -->
+                <div class="relative group" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Branch connecting to center (Rightwards) -->
+                    <div class="hidden lg:block absolute top-12 -right-12 w-12 h-[2px] bg-gradient-to-r from-transparent to-[#FFC107] opacity-50 group-hover:opacity-100 transition-all duration-500"></div>
+                    <div class="hidden lg:block absolute top-12 -right-[54px] w-4 h-4 bg-white border-4 border-[#FFC107] rounded-full transform -translate-y-1/2 shadow-[0_0_10px_rgba(255,193,7,0.5)] z-10 group-hover:scale-150 transition-all duration-500"></div>
+                    
+                    <div class="faq-item bg-white border border-gray-100 rounded-[32px] shadow-sm hover:shadow-xl transition-all duration-300 relative z-20">
+                        <button class="faq-button w-full flex justify-between items-center font-bold cursor-pointer p-6 md:p-8 text-[#0B1536] text-lg md:text-xl text-right">
+                            <span>ما هي مناطق التوصيل المتاحة؟</span>
+                            <div class="faq-icon flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-50 text-[#FFC107] flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="overflow-hidden">
+                                <div class="faq-inner-text px-6 md:px-8 pb-8 pt-0 text-gray-500 leading-relaxed text-lg border-t border-gray-50 mt-2 pt-6">
+                                    نحن نقوم بتغطية كافة مناطق المدينة الرئيسية والأحياء المجاورة. إذا كان موقعك خارج نطاق التغطية المعتاد، سيتم إخبارك بذلك أثناء تحديد موقعك على الخريطة قبل إتمام الطلب لضمان الشفافية.
+                                </div>
+                            </div>
                         </div>
-                    </summary>
-                    <div class="px-6 md:px-8 pb-8 pt-0 text-gray-500 leading-relaxed text-lg animate-fade-in border-t border-gray-50 mt-2 pt-6">
-                        نحن نقوم بتغطية كافة مناطق المدينة الرئيسية والأحياء المجاورة. إذا كان موقعك خارج نطاق التغطية المعتاد، سيتم إخبارك بذلك أثناء تحديد موقعك على الخريطة قبل إتمام الطلب لضمان الشفافية.
                     </div>
-                </details>
-            </div>
+                </div>
 
-            <!-- Question 3 (Right Column) -->
-            <div class="relative group lg:-mt-16" data-aos="fade-up" data-aos-delay="300">
-                <!-- Branch connecting to center (Leftwards) -->
-                <div class="hidden lg:block absolute top-12 -left-12 w-12 h-[2px] bg-gradient-to-l from-transparent to-[#FFC107] opacity-50 group-hover:opacity-100 transition-all duration-500"></div>
-                <div class="hidden lg:block absolute top-12 -left-[54px] w-4 h-4 bg-white border-4 border-[#FFC107] rounded-full transform -translate-y-1/2 shadow-[0_0_10px_rgba(255,193,7,0.5)] z-10 group-hover:scale-150 transition-all duration-500"></div>
-                
-                <details name="faq" class="bg-white border border-gray-100 rounded-[32px] shadow-sm hover:shadow-xl transition-all duration-300 relative z-20">
-                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 md:p-8 text-[#0B1536] text-lg md:text-xl">
-                        <span>هل يمكنني تتبع حالة طلبي؟</span>
-                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-50 text-[#FFC107] flex items-center justify-center transition-all duration-300 group-open:-rotate-180 group-open:bg-[#FFC107] group-open:text-white group-open:shadow-md">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                <!-- Question 4 -->
+                <div class="relative group" data-aos="fade-up" data-aos-delay="400">
+                    <!-- Branch connecting to center (Rightwards) -->
+                    <div class="hidden lg:block absolute top-12 -right-12 w-12 h-[2px] bg-gradient-to-r from-transparent to-[#FFC107] opacity-50 group-hover:opacity-100 transition-all duration-500"></div>
+                    <div class="hidden lg:block absolute top-12 -right-[54px] w-4 h-4 bg-white border-4 border-[#FFC107] rounded-full transform -translate-y-1/2 shadow-[0_0_10px_rgba(255,193,7,0.5)] z-10 group-hover:scale-150 transition-all duration-500"></div>
+                    
+                    <div class="faq-item bg-white border border-gray-100 rounded-[32px] shadow-sm hover:shadow-xl transition-all duration-300 relative z-20">
+                        <button class="faq-button w-full flex justify-between items-center font-bold cursor-pointer p-6 md:p-8 text-[#0B1536] text-lg md:text-xl text-right">
+                            <span>ما هي طرق الدفع المتاحة؟</span>
+                            <div class="faq-icon flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-50 text-[#FFC107] flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="overflow-hidden">
+                                <div class="faq-inner-text px-6 md:px-8 pb-8 pt-0 text-gray-500 leading-relaxed text-lg border-t border-gray-50 mt-2 pt-6">
+                                    لسهولة التعامل، نوفر حالياً خدمة "الدفع عند الاستلام" كخيار أساسي ومريح لجميع عملائنا، بحيث تدفع قيمة الطلب والتوصيل نقداً للمندوب عند استلام طلبك والتأكد منه بالكامل.
+                                </div>
+                            </div>
                         </div>
-                    </summary>
-                    <div class="px-6 md:px-8 pb-8 pt-0 text-gray-500 leading-relaxed text-lg animate-fade-in border-t border-gray-50 mt-2 pt-6">
-                        بالتأكيد! بمجرد قبول المندوب لطلبك، سيظهر لك رقمه للتواصل معه مباشرة، وتقدر تتابع معاه خط سير طلبك لحد ما يوصل إلى باب بيتك بأمان.
                     </div>
-                </details>
-            </div>
+                </div>
 
-            <!-- Question 4 (Left Column) -->
-            <div class="relative group lg:mt-16" data-aos="fade-up" data-aos-delay="400">
-                <!-- Branch connecting to center (Rightwards) -->
-                <div class="hidden lg:block absolute top-12 -right-12 w-12 h-[2px] bg-gradient-to-r from-transparent to-[#FFC107] opacity-50 group-hover:opacity-100 transition-all duration-500"></div>
-                <div class="hidden lg:block absolute top-12 -right-[54px] w-4 h-4 bg-white border-4 border-[#FFC107] rounded-full transform -translate-y-1/2 shadow-[0_0_10px_rgba(255,193,7,0.5)] z-10 group-hover:scale-150 transition-all duration-500"></div>
-                
-                <details name="faq" class="bg-white border border-gray-100 rounded-[32px] shadow-sm hover:shadow-xl transition-all duration-300 relative z-20">
-                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 md:p-8 text-[#0B1536] text-lg md:text-xl">
-                        <span>ما هي طرق الدفع المتاحة؟</span>
-                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-50 text-[#FFC107] flex items-center justify-center transition-all duration-300 group-open:-rotate-180 group-open:bg-[#FFC107] group-open:text-white group-open:shadow-md">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                    </summary>
-                    <div class="px-6 md:px-8 pb-8 pt-0 text-gray-500 leading-relaxed text-lg animate-fade-in border-t border-gray-50 mt-2 pt-6">
-                        لسهولة التعامل، نوفر حالياً خدمة "الدفع عند الاستلام" كخيار أساسي ومريح لجميع عملائنا، بحيث تدفع قيمة الطلب والتوصيل نقداً للمندوب عند استلام طلبك والتأكد منه بالكامل.
-                    </div>
-                </details>
-            </div>
-
-            <!-- Question 5 (Right Column) -->
-            <div class="relative group lg:-mt-16" data-aos="fade-up" data-aos-delay="500">
-                <!-- Branch connecting to center (Leftwards) -->
-                <div class="hidden lg:block absolute top-12 -left-12 w-12 h-[2px] bg-gradient-to-l from-transparent to-[#FFC107] opacity-50 group-hover:opacity-100 transition-all duration-500"></div>
-                <div class="hidden lg:block absolute top-12 -left-[54px] w-4 h-4 bg-white border-4 border-[#FFC107] rounded-full transform -translate-y-1/2 shadow-[0_0_10px_rgba(255,193,7,0.5)] z-10 group-hover:scale-150 transition-all duration-500"></div>
-                
-                <details name="faq" class="bg-white border border-gray-100 rounded-[32px] shadow-sm hover:shadow-xl transition-all duration-300 relative z-20">
-                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 md:p-8 text-[#0B1536] text-lg md:text-xl">
-                        <span>ماذا أفعل في حالة مشكلة بالطلب؟</span>
-                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-50 text-[#FFC107] flex items-center justify-center transition-all duration-300 group-open:-rotate-180 group-open:bg-[#FFC107] group-open:text-white group-open:shadow-md">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                    </summary>
-                    <div class="px-6 md:px-8 pb-8 pt-0 text-gray-500 leading-relaxed text-lg animate-fade-in border-t border-gray-50 mt-2 pt-6">
-                        رضاك هو أولويتنا. إذا واجهت أي مشكلة بخصوص الطلب أو التوصيل، يرجى التواصل معنا فوراً عبر صفحة "تواصل معنا" وسيقوم فريق الدعم الفني بحل مشكلتك وتعويضك في أسرع وقت.
-                    </div>
-                </details>
             </div>
 
         </div>
@@ -158,15 +204,20 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const faqs = document.querySelectorAll("details[name='faq']");
-        faqs.forEach((faq) => {
-            faq.addEventListener("click", (e) => {
-                if (!faq.hasAttribute("open")) {
-                    faqs.forEach((otherFaq) => {
-                        if (otherFaq !== faq) {
-                            otherFaq.removeAttribute("open");
-                        }
-                    });
+        const faqItems = document.querySelectorAll(".faq-item");
+        faqItems.forEach((item) => {
+            const button = item.querySelector(".faq-button");
+            button.addEventListener("click", () => {
+                const isOpen = item.classList.contains("is-open");
+                
+                // Close all items
+                faqItems.forEach(faq => {
+                    faq.classList.remove("is-open");
+                });
+
+                // Open the clicked item if it wasn't already open
+                if (!isOpen) {
+                    item.classList.add("is-open");
                 }
             });
         });

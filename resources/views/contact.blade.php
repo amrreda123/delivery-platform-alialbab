@@ -97,7 +97,90 @@
                 </div>
             </a>
             
+            <!-- TikTok -->
+            <a href="#" target="_blank" class="flex items-center gap-6 p-6 bg-white rounded-[24px] border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group" data-aos="fade-up" data-aos-delay="500">
+                <div class="w-16 h-16 rounded-2xl bg-black/10 flex items-center justify-center text-black group-hover:bg-black group-hover:text-white transition-colors duration-300 shrink-0">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z"/></svg>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-bold text-[#0B1536] text-xl mb-1">تيك توك</h3>
+                    <p class="text-gray-500 text-sm">اكتشف أحدث العروض والفيديوهات</p>
+                </div>
+                <div class="text-gray-300 group-hover:text-black group-hover:-translate-x-1 transition-all">
+                    <svg class="w-6 h-6 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+            
         </div>
+    </div>
+</section>
+
+<!-- Contact & Payment Section -->
+<section class="max-w-7xl mx-auto px-6 md:px-12 py-12 mb-20">
+    <div class="text-center mb-16" data-aos="fade-up">
+        <span class="inline-block text-xs font-bold tracking-[0.2em] text-[#FFC107] uppercase mb-3">الدفع الإلكتروني</span>
+        <h2 class="text-3xl lg:text-4xl font-black text-[#0B1536] mb-4">طرق الدفع المتاحة</h2>
+        <div class="flex items-center justify-center gap-2 mt-4">
+            <div class="h-1 w-16 rounded-full bg-[#FFC107]"></div>
+            <div class="h-1 w-4 rounded-full bg-[#FFC107]/40"></div>
+        </div>
+        <p class="text-gray-500 mt-5 text-base max-w-lg mx-auto leading-relaxed">
+            نوفر لك خيارات دفع إلكترونية مريحة وآمنة، لتسهيل عمليات الدفع والتحويل
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        
+        <!-- Vodafone Cash -->
+        <div data-aos="fade-up" data-aos-delay="100" class="group relative bg-white rounded-3xl p-8 flex flex-col items-center justify-center text-center border border-red-100 hover:shadow-2xl hover:shadow-red-200/50 transition-all duration-300 overflow-hidden min-h-[280px]">
+            <div class="absolute inset-0 bg-gradient-to-br from-red-50 to-red-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            <!-- Floating Elements -->
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-red-50 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            <div class="relative z-10 flex flex-col items-center w-full">
+                <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#E60000] to-[#b30000] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl shadow-red-500/30">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                </div>
+                <h3 class="font-bold text-2xl text-gray-900 mb-4">فودافون كاش</h3>
+                
+                <!-- Number Box -->
+                <div class="bg-white/80 backdrop-blur-sm px-6 py-4 rounded-xl shadow-sm border border-red-100 w-full mb-3 flex items-center justify-between group-hover:border-red-300 transition-colors relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <span class="font-black text-2xl lg:text-3xl text-[#E60000] tracking-[0.1em] relative z-10 font-mono">01060401725</span>
+                    <button onclick="navigator.clipboard.writeText('01060401725')" class="text-red-300 hover:text-[#E60000] hover:bg-red-50 p-2 rounded-lg transition-all relative z-10" title="نسخ الرقم">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </button>
+                </div>
+                <p class="text-sm text-gray-500 font-medium">للتحويلات والدفع السريع</p>
+            </div>
+        </div>
+
+        <!-- Etisalat Cash -->
+        <div data-aos="fade-up" data-aos-delay="200" class="group relative bg-white rounded-3xl p-8 flex flex-col items-center justify-center text-center border border-green-100 hover:shadow-2xl hover:shadow-green-200/50 transition-all duration-300 overflow-hidden min-h-[280px]">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#73C044]/10 to-[#73C044]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            <!-- Floating Elements -->
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-[#73C044]/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+            <div class="relative z-10 flex flex-col items-center w-full">
+                <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#73C044] to-[#5a9a34] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl shadow-[#73C044]/30">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                </div>
+                <h3 class="font-bold text-2xl text-gray-900 mb-4">اتصالات كاش</h3>
+                
+                <!-- Number Box -->
+                <div class="bg-white/80 backdrop-blur-sm px-6 py-4 rounded-xl shadow-sm border border-green-100 w-full mb-3 flex items-center justify-between group-hover:border-[#73C044]/40 transition-colors relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-[#73C044]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <span class="font-black text-2xl lg:text-3xl text-[#73C044] tracking-[0.1em] relative z-10 font-mono">01130424003</span>
+                    <button onclick="navigator.clipboard.writeText('01130424003')" class="text-green-300 hover:text-[#73C044] hover:bg-[#73C044]/10 p-2 rounded-lg transition-all relative z-10" title="نسخ الرقم">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </button>
+                </div>
+                <p class="text-sm text-gray-500 font-medium">أسهل طريقة للدفع المباشر</p>
+            </div>
+        </div>
+
     </div>
 </section>
 @endsection
