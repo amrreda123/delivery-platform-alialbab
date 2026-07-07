@@ -3,15 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Setting;
 
 class HomeController extends Controller
 {
     public function home() {
-        return view('home');
+        $categories = Category::where('is_active', true)->get();
+        $cashSettings = Setting::whereIn('key', ['vodafone_cash_number', 'etisalat_cash_number'])
+                           ->pluck('value', 'key')
+                           ->toArray();
+
+        return view('home', compact('categories','cashSettings'));
     }
 
     public function services() {
-        return view('services');
+        $categories = Category::where('is_active', true)->get();
+        return view('services', compact('categories'));
     }
 
     public function howItWorks() {
@@ -23,6 +31,7 @@ class HomeController extends Controller
     }
 
     public function contact() {
-        return view('contact');
+        $settings = Setting::pluck('value', 'key')->toArray();
+        return view('contact', compact('settings'));
     }
 }

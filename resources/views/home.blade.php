@@ -5,7 +5,7 @@
 <!-- Hero Section - Full Width, Edge to Edge -->
 <section class="w-full overflow-hidden mb-8">
     <!-- flex-row in RTL: first=RIGHT, second=LEFT -->
-    <div class="flex flex-row min-h-[420px] lg:min-h-[500px]">
+    <div class="flex flex-row min-h-[75vh] lg:min-h-[80vh]">
 
         <!-- RIGHT: Text Area with delivery.jpg background (first in HTML = RIGHT in RTL) -->
         <div class="w-full lg:w-[60%] relative flex flex-col justify-center px-10 lg:px-16 xl:px-20 py-14">
@@ -75,80 +75,9 @@
         {{-- Services Cards --}}
         <div class="grid grid-cols-2 lg:grid-cols-5 gap-5">
 
-            {{-- Service: Clothes --}}
-            <div data-aos="fade-up" data-aos-delay="100" class="service-card group relative bg-white rounded-[24px] p-6 flex flex-col items-center text-center cursor-pointer border border-gray-100/80 hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-100/60 transition-all duration-300 overflow-hidden">
-                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[24px]" style="background: linear-gradient(135deg, #f5f2f9 0%, #ede9f6 100%);"></div>
-                <div class="relative z-10 flex flex-col items-center">
-                    <div class="w-20 h-20 mb-5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md" style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);">
-                        <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold text-base text-[#0B1536] mb-1.5 leading-tight">توصيل ملابس</h3>
-                    <p class="text-xs text-gray-400 font-medium mb-4 leading-relaxed">من جميع المتاجر</p>
-                    <div class="w-10 h-1 rounded-full transition-all duration-300 group-hover:w-16" style="background: linear-gradient(90deg, #8B5CF6, #7C3AED);"></div>
-                </div>
-            </div>
-
-            {{-- Service: Restaurants --}}
-            <div data-aos="fade-up" data-aos-delay="200" class="service-card group relative bg-white rounded-[24px] p-6 flex flex-col items-center text-center cursor-pointer border border-gray-100/80 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-100/60 transition-all duration-300 overflow-hidden">
-                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[24px]" style="background: linear-gradient(135deg, #fff7f0 0%, #fff0e6 100%);"></div>
-                <div class="relative z-10 flex flex-col items-center">
-                    <div class="w-20 h-20 mb-5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md" style="background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);">
-                        <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold text-base text-[#0B1536] mb-1.5 leading-tight">توصيل مطاعم</h3>
-                    <p class="text-xs text-gray-400 font-medium mb-4 leading-relaxed">أطيب الأكل، لباب بيتك</p>
-                    <div class="w-10 h-1 rounded-full transition-all duration-300 group-hover:w-16" style="background: linear-gradient(90deg, #F97316, #EA580C);"></div>
-                </div>
-            </div>
-
-            {{-- Service: Pharmacies --}}
-            <div data-aos="fade-up" data-aos-delay="300" class="service-card group relative bg-white rounded-[24px] p-6 flex flex-col items-center text-center cursor-pointer border border-gray-100/80 hover:-translate-y-2 hover:shadow-2xl hover:shadow-teal-100/60 transition-all duration-300 overflow-hidden">
-                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[24px]" style="background: linear-gradient(135deg, #f0fdfb 0%, #e6f9f7 100%);"></div>
-                <div class="relative z-10 flex flex-col items-center">
-                    <div class="w-20 h-20 mb-5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md" style="background: linear-gradient(135deg, #14B8A6 0%, #0D9488 100%);">
-                        <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold text-base text-[#0B1536] mb-1.5 leading-tight">توصيل صيدليات</h3>
-                    <p class="text-xs text-gray-400 font-medium mb-4 leading-relaxed">دواؤك يوصلك بسرعة</p>
-                    <div class="w-10 h-1 rounded-full transition-all duration-300 group-hover:w-16" style="background: linear-gradient(90deg, #14B8A6, #0D9488);"></div>
-                </div>
-            </div>
-
-            {{-- Service: Supermarket --}}
-            <div data-aos="fade-up" data-aos-delay="400" class="service-card group relative bg-white rounded-[24px] p-6 flex flex-col items-center text-center cursor-pointer border border-gray-100/80 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-100/60 transition-all duration-300 overflow-hidden">
-                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[24px]" style="background: linear-gradient(135deg, #eff6ff 0%, #e8f0fe 100%);"></div>
-                <div class="relative z-10 flex flex-col items-center">
-                    <div class="w-20 h-20 mb-5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md" style="background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);">
-                        <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.94-1.5l1.32-6.5H6"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold text-base text-[#0B1536] mb-1.5 leading-tight">توصيل سوبر ماركت</h3>
-                    <p class="text-xs text-gray-400 font-medium mb-4 leading-relaxed">كل احتياجاتك اليومية</p>
-                    <div class="w-10 h-1 rounded-full transition-all duration-300 group-hover:w-16" style="background: linear-gradient(90deg, #3B82F6, #2563EB);"></div>
-                </div>
-            </div>
-
-            {{-- Service: Any Item --}}
-            <div data-aos="fade-up" data-aos-delay="500" class="service-card group relative bg-white rounded-[24px] p-6 flex flex-col items-center text-center cursor-pointer border border-gray-100/80 hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-100/60 transition-all duration-300 overflow-hidden">
-                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[24px]" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);"></div>
-                <div class="relative z-10 flex flex-col items-center">
-                    <div class="w-20 h-20 mb-5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md" style="background: linear-gradient(135deg, #FFC107 0%, #F59E0B 100%);">
-                        <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold text-base text-[#0B1536] mb-1.5 leading-tight">توصيل أي غرض</h3>
-                    <p class="text-xs text-gray-400 font-medium mb-4 leading-relaxed">نوصل أي شيء تريده</p>
-                    <div class="w-10 h-1 rounded-full transition-all duration-300 group-hover:w-16" style="background: linear-gradient(90deg, #FFC107, #F59E0B);"></div>
-                </div>
-            </div>
+            @foreach($categories as $index => $category)
+                <x-service-card :category="$category" :index="$index" />
+            @endforeach
 
         </div>
     </div>
@@ -237,8 +166,8 @@
                 <!-- Number Box -->
                 <div class="bg-white/80 backdrop-blur-sm px-6 py-4 rounded-xl shadow-sm border border-red-100 w-full mb-3 flex items-center justify-between group-hover:border-red-300 transition-colors relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-r from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <span class="font-black text-2xl lg:text-3xl text-[#E60000] tracking-[0.1em] relative z-10 font-mono">01060401725</span>
-                    <button onclick="navigator.clipboard.writeText('01060401725')" class="text-red-300 hover:text-[#E60000] hover:bg-red-50 p-2 rounded-lg transition-all relative z-10" title="نسخ الرقم">
+                    <span class="font-black text-2xl lg:text-3xl text-[#E60000] tracking-[0.1em] relative z-10 font-mono">{{ $cashSettings['vodafone_cash_number'] ?? '01060401725' }}</span>
+                    <button onclick="navigator.clipboard.writeText('{{ $cashSettings['vodafone_cash_number'] ?? '01060401725' }}')" class="text-red-300 hover:text-[#E60000] hover:bg-red-50 p-2 rounded-lg transition-all relative z-10" title="نسخ الرقم">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                     </button>
                 </div>
@@ -262,8 +191,8 @@
                 <!-- Number Box -->
                 <div class="bg-white/80 backdrop-blur-sm px-6 py-4 rounded-xl shadow-sm border border-green-100 w-full mb-3 flex items-center justify-between group-hover:border-[#73C044]/40 transition-colors relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-r from-[#73C044]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <span class="font-black text-2xl lg:text-3xl text-[#73C044] tracking-[0.1em] relative z-10 font-mono">01130424003</span>
-                    <button onclick="navigator.clipboard.writeText('01130424003')" class="text-green-300 hover:text-[#73C044] hover:bg-[#73C044]/10 p-2 rounded-lg transition-all relative z-10" title="نسخ الرقم">
+                    <span class="font-black text-2xl lg:text-3xl text-[#73C044] tracking-[0.1em] relative z-10 font-mono">{{ $cashSettings['etisalat_cash_number'] ?? '01130424003' }}</span>
+                    <button onclick="navigator.clipboard.writeText('{{ $cashSettings['etisalat_cash_number'] ?? '01130424003' }}')" class="text-green-300 hover:text-[#73C044] hover:bg-[#73C044]/10 p-2 rounded-lg transition-all relative z-10" title="نسخ الرقم">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                     </button>
                 </div>

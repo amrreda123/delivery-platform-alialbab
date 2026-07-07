@@ -143,80 +143,9 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Service: Any Item -->
-            <div onclick="window.location.href='tel:01097752649'" data-aos="fade-up" data-aos-delay="100" class="group bg-white rounded-[24px] p-8 border border-gray-100 hover-lift hover:border-yellow-300 hover:shadow-[0_20px_40px_-15px_rgba(255,193,7,0.3)] transition-all duration-500 cursor-pointer">
-                <div class="w-16 h-16 mb-6 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500" style="background: linear-gradient(135deg, #FFC107 0%, #F59E0B 100%);">
-                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-[#0B1536] mb-3 group-hover:text-yellow-600 transition-colors">توصيل أي غرض (بيك أب)</h3>
-                <p class="text-gray-500 text-sm leading-relaxed mb-4 group-hover:text-gray-600 transition-colors">نسيت مفاتيحك؟ محتاج توصل ورق مهم؟ أو حتى هدية لصديق؟ بنوصلك أي حاجة من مكان لمكان بأمان تام وفي أسرع وقت.</p>
-                <div class="inline-flex items-center gap-2 text-yellow-600 font-bold">
-                    اطلب الآن
-                    <svg class="w-4 h-4 rotate-180 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </div>
-            </div>
-
-            <!-- Service: Supermarket -->
-            <div onclick="window.location.href='tel:01097752649'" data-aos="fade-up" data-aos-delay="200" class="group bg-white rounded-[24px] p-8 border border-gray-100 hover-lift hover:border-blue-300 hover:shadow-[0_20px_40px_-15px_rgba(59,130,246,0.3)] transition-all duration-500 cursor-pointer">
-                <div class="w-16 h-16 mb-6 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500" style="background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);">
-                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.94-1.5l1.32-6.5H6"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-[#0B1536] mb-3 group-hover:text-blue-600 transition-colors">مقاضي السوبر ماركت</h3>
-                <p class="text-gray-500 text-sm leading-relaxed mb-4 group-hover:text-gray-600 transition-colors">كل احتياجات بيتك اليومية من خضار، فواكه، ومعلبات هتوصلك طازجة من أقرب سوبر ماركت ليك بدون ما تتحرك من مكانك.</p>
-                <div class="inline-flex items-center gap-2 text-blue-600 font-bold">
-                    تسوق الآن
-                    <svg class="w-4 h-4 rotate-180 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </div>
-            </div>
-
-            <!-- Service: Pharmacies -->
-            <div onclick="window.location.href='tel:01097752649'" data-aos="fade-up" data-aos-delay="300" class="group bg-white rounded-[24px] p-8 border border-gray-100 hover-lift hover:border-teal-300 hover:shadow-[0_20px_40px_-15px_rgba(20,184,166,0.3)] transition-all duration-500 cursor-pointer">
-                <div class="w-16 h-16 mb-6 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500" style="background: linear-gradient(135deg, #14B8A6 0%, #0D9488 100%);">
-                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-[#0B1536] mb-3 group-hover:text-teal-600 transition-colors">توصيل الصيدليات</h3>
-                <p class="text-gray-500 text-sm leading-relaxed mb-4 group-hover:text-gray-600 transition-colors">في أوقات التعب إحنا معاك. نوفر لك الأدوية والمستلزمات الطبية من أقرب صيدلية في وقت قياسي جداً.</p>
-                <div class="inline-flex items-center gap-2 text-teal-600 font-bold">
-                    اطلب أدويتك
-                    <svg class="w-4 h-4 rotate-180 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </div>
-            </div>
-
-            <!-- Service: Restaurants -->
-            <div onclick="window.location.href='tel:01097752649'" data-aos="fade-up" data-aos-delay="400" class="group bg-white rounded-[24px] p-8 border border-gray-100 hover-lift hover:border-orange-300 hover:shadow-[0_20px_40px_-15px_rgba(249,115,22,0.3)] transition-all duration-500 cursor-pointer">
-                <div class="w-16 h-16 mb-6 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500" style="background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);">
-                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-[#0B1536] mb-3 group-hover:text-orange-600 transition-colors">توصيل المطاعم</h3>
-                <p class="text-gray-500 text-sm leading-relaxed mb-4 group-hover:text-gray-600 transition-colors">أكلك المفضل هيوصلك سخن وفي ميعاده. نغطي مجموعة واسعة من المطاعم لتلبية كل أذواقك.</p>
-                <div class="inline-flex items-center gap-2 text-orange-600 font-bold">
-                    تصفح المطاعم
-                    <svg class="w-4 h-4 rotate-180 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </div>
-            </div>
-
-            <!-- Service: Clothes -->
-            <div onclick="window.location.href='tel:01097752649'" data-aos="fade-up" data-aos-delay="500" class="group bg-white rounded-[24px] p-8 border border-gray-100 hover-lift hover:border-purple-300 hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.3)] transition-all duration-500 cursor-pointer">
-                <div class="w-16 h-16 mb-6 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500" style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);">
-                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-[#0B1536] mb-3 group-hover:text-purple-600 transition-colors">توصيل الملابس والمتاجر</h3>
-                <p class="text-gray-500 text-sm leading-relaxed mb-4 group-hover:text-gray-600 transition-colors">اشتريت أونلاين أو من المحل وعايز حاجتك توصلك؟ مندوبينا هيوصلوا لك لبسك وأغراضك بكل عناية.</p>
-                <div class="inline-flex items-center gap-2 text-purple-600 font-bold">
-                    اطلب توصيل
-                    <svg class="w-4 h-4 rotate-180 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </div>
-            </div>
+            @foreach($categories as $index => $category)
+                <x-service-card-detailed :category="$category" :index="$index" />
+            @endforeach
             
             <!-- Service: Corporate -->
             <div onclick="window.location.href='tel:01097752649'" data-aos="fade-up" data-aos-delay="600" class="group bg-[#FAFAFA] rounded-[24px] p-8 border border-dashed border-gray-300 hover:border-gray-400 hover:bg-gray-100 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-pointer">
