@@ -15,15 +15,9 @@ return new class extends Migration
         $table->id();
         
         $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-        $table->foreignId('vendor_id')->nullable()->constrained('users')->onDelete('set null');
         
         $table->string('name'); 
-        $table->text('description')->nullable();
         $table->string('logo')->nullable(); 
-
-        $table->string('address')->nullable();
-        $table->decimal('lat', 10, 8)->nullable();
-        $table->decimal('lng', 11, 8)->nullable(); 
         
         $table->boolean('is_active')->default(true); 
         $table->timestamps();

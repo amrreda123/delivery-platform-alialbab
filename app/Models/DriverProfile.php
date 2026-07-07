@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;   
 
-#[Fillable(['user_id', 'vehicle_type', 'is_available', 'current_lat', 'current_lng', 'wallet_balance', 'rating'])]
+#[Fillable(['user_id', 'vehicle_type', 'is_available'])]
 class DriverProfile extends Model
 {
     use HasFactory;

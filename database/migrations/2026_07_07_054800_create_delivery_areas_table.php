@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('delivery_areas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->decimal('delivery_fee', 8, 2)->default(0.00);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

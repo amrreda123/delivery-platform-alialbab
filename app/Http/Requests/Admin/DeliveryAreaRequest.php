@@ -31,6 +31,7 @@ class DeliveryAreaRequest extends FormRequest
                 'max:255',
                 Rule::unique('delivery_areas', 'name')->ignore($areaId),
             ],
+            'delivery_fee' => 'required|numeric|min:0',
             'is_active' => 'nullable|boolean',
         ];
     }

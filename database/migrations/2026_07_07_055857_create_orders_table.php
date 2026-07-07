@@ -24,23 +24,15 @@ return new class extends Migration
 
             // تفاصيل الاستلام (منين؟)
             $table->string('pickup_address')->nullable(); 
-            $table->decimal('pickup_lat', 10, 8)->nullable();
-            $table->decimal('pickup_lng', 11, 8)->nullable();
 
             // تفاصيل التسليم (لفين؟)
             $table->foreignId('address_id')->nullable()->constrained('addresses')->onDelete('set null'); 
             $table->string('dropoff_address')->nullable(); 
-            $table->decimal('dropoff_lat', 10, 8)->nullable();
-            $table->decimal('dropoff_lng', 11, 8)->nullable();
 
             // تفاصيل الأغراض والملاحظات
             $table->text('notes')->nullable(); 
-            $table->string('image_path')->nullable(); 
-            
-            $table->string('invoice_image')->nullable(); 
 
             // الحسابات والماليات
-            $table->decimal('distance', 8, 2)->nullable(); 
             $table->decimal('items_total', 10, 2)->default(0.00); 
             $table->decimal('delivery_fee', 10, 2)->default(0.00); 
             $table->decimal('total_amount', 10, 2)->default(0.00); 

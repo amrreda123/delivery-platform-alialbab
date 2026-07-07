@@ -27,7 +27,7 @@
             <tbody>
                 @forelse($categories as $category)
                 <tr class="border-b border-gray-50 hover:bg-gray-50/50 transition-colors group">
-                    <td class="p-4">
+                    <td class="p-4 align-top">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center shrink-0 overflow-hidden border border-gray-200/50">
                                 @if($category->icon)
@@ -39,10 +39,24 @@
                             <span class="font-bold text-[#0B1536]">{{ $category->name }}</span>
                         </div>
                     </td>
-                    <td class="p-4 text-gray-600 text-sm font-semibold">
-                        <span class="bg-gray-100 text-gray-600 py-1 px-3 rounded-lg">{{ $category->stores_count ?? 0 }} متجر</span>
+                    <td class="p-4 align-top text-gray-600 text-sm font-semibold">
+                        <div class="flex flex-col">
+                            <button type="button" onclick="const t = this.nextElementSibling; t.classList.toggle('max-h-0'); t.classList.toggle('opacity-0'); t.classList.toggle('max-h-96'); t.classList.toggle('opacity-100'); t.classList.toggle('mt-2'); this.querySelector('svg').classList.toggle('rotate-180');" class="inline-flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded-lg w-max font-bold text-xs cursor-pointer transition-colors gap-1">
+                                <span>{{ $category->stores_count ?? 0 }} متجر</span>
+                                <svg class="w-3 h-3 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out">
+                                @if($category->stores && $category->stores->count() > 0)
+                                    <div class="flex flex-wrap gap-1.5 max-w-[200px] py-1">
+                                        @foreach($category->stores as $store)
+                                            <span class="bg-blue-50 text-blue-700 text-[10px] px-2 py-1 rounded-md border border-blue-100 whitespace-nowrap">{{ $store->name }}</span>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
                     </td>
-                    <td class="p-4">
+                    <td class="p-4 align-top">
                         @if($category->is_active)
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold border border-emerald-100">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> نشط
@@ -53,8 +67,8 @@
                             </span>
                         @endif
                     </td>
-                    <td class="p-4">
-                        <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <td class="p-4 align-top">
+                        <div class="flex items-center gap-2">
                             <a href="{{ route('admin.categories.edit', $category) }}" class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white flex items-center justify-center transition-colors">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                             </a>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\DriverController;
+use App\Http\Controllers\Admin\UserController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -36,7 +37,8 @@ Route::prefix('dashboard')->name('admin.')->group(function () {
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::resource('stores', StoreController::class)->except(['show']);
     Route::resource('delivery-areas', DeliveryAreaController::class)->except(['show']);
-    Route::resource('drivers', DriverController::class)->except(['show']);
+    Route::resource('drivers', DriverController::class);
+    Route::resource('users', UserController::class);
     
     Route::resource('orders', AdminOrderController::class)->only(['index', 'show', 'update']);
 });

@@ -6,6 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\UpdateSettingsRequest;
 use App\Services\SettingService;
+use App\Models\Order;
+use App\Models\User;
+use App\Models\DeliveryArea;
+use App\Models\Category;
+use App\Models\Store;
+use App\Models\DriverProfile;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -15,7 +22,18 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('admin.index');
+        $stats = [
+            'pending_orders' => Order::where('status', 'pending')->count(),
+            'total_revenue' => Order::sum('total_amount'),
+            'total_customers' => User::where('role', 'customer')->count(),
+            'total_delivery_areas' => DeliveryArea::count(),
+            'daily_profits' => Order::whereDate('created_at', Carbon::today())->sum('delivery_fee'),
+            'monthly_profits' => Order::whereMonth('created_at', Carbon::now()->month)
+                                      ->whereYear('created_at', Carbon::now()->year)
+                                      ->sum('delivery_fee'),
+        ];
+
+        return view('admin.index', compact('stats'));
     }
     public function editSettings()
     {

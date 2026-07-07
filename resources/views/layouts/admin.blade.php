@@ -50,7 +50,6 @@
         .admin-sidebar {
             background: linear-gradient(160deg, #0B1536 0%, #111f4d 40%, #0d1a40 70%, #0B1536 100%);
             animation: slideInRight 0.5s ease-out;
-            position: relative;
             overflow: hidden;
         }
         .admin-sidebar::before {
@@ -192,10 +191,13 @@
 </head>
 <body class="main-content antialiased overflow-hidden h-screen">
 
-<div class="flex h-screen" dir="rtl">
+<div class="flex h-screen relative overflow-hidden" dir="rtl">
+
+    {{-- Mobile Overlay --}}
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden transition-opacity"></div>
 
     {{-- ====== SIDEBAR ====== --}}
-    <aside class="admin-sidebar w-64 shrink-0 flex flex-col h-full z-30 shadow-2xl relative">
+    <aside id="admin-sidebar" class="admin-sidebar w-64 shrink-0 flex flex-col h-full z-40 shadow-2xl absolute lg:relative right-0 top-0 bottom-0 translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
 
         {{-- Logo --}}
         <a href="{{ route('home') }}" class="flex items-center gap-3.5 px-6 py-5 border-b border-white/10 hover:bg-white/5 transition-all duration-300 group relative z-10">
@@ -254,6 +256,13 @@
                 المناديب
             </a>
 
+            <a href="{{ route('admin.users.index') }}" class="sidebar-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                <svg class="w-[18px] h-[18px] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                العملاء
+            </a>
+
             <a href="{{ route('admin.delivery-areas.index') }}" class="sidebar-link {{ request()->routeIs('admin.delivery-areas.*') ? 'active' : '' }}">
                 <svg class="w-[18px] h-[18px] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
@@ -304,12 +313,18 @@
     <div class="flex-1 flex flex-col h-screen overflow-hidden">
 
         {{-- Top Bar --}}
-        <header class="top-bar sticky top-0 z-20 px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
+        <header class="top-bar sticky top-0 z-20 px-5 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 lg:gap-4">
+                {{-- Mobile Menu Toggle --}}
+                <button onclick="toggleSidebar()" class="lg:hidden w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center text-gray-600 hover:bg-gray-200 transition shrink-0">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
                 {{-- Breadcrumb --}}
                 <div>
-                    <h1 class="text-[18px] font-black text-[#0B1536] leading-none">@yield('page-title', 'لوحة التحكم')</h1>
-                    <p class="text-gray-400 text-xs mt-1">@yield('page-subtitle', 'مرحباً بك في لوحة إدارة علي الباب')</p>
+                    <h1 class="text-base lg:text-[18px] font-black text-[#0B1536] leading-none">@yield('page-title', 'لوحة التحكم')</h1>
+                    <p class="hidden sm:block text-gray-400 text-xs mt-1">@yield('page-subtitle', 'مرحباً بك في لوحة إدارة علي الباب')</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">
@@ -350,7 +365,7 @@
         @endif
 
         {{-- Page Content --}}
-        <main class="flex-1 overflow-y-auto p-8">
+        <main class="flex-1 overflow-y-auto p-4 lg:p-8">
             @yield('content')
         </main>
     </div>
@@ -380,6 +395,19 @@
                 document.getElementById(formId).submit();
             }
         })
+    }
+
+    function toggleSidebar() {
+        const sidebar = document.getElementById('admin-sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        
+        if (sidebar.classList.contains('translate-x-full')) {
+            sidebar.classList.remove('translate-x-full');
+            overlay.classList.remove('hidden');
+        } else {
+            sidebar.classList.add('translate-x-full');
+            overlay.classList.add('hidden');
+        }
     }
 </script>
 

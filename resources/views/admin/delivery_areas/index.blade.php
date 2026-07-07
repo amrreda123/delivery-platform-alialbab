@@ -19,6 +19,7 @@
             <thead>
                 <tr class="border-b border-gray-100 text-gray-400 text-sm font-bold bg-gray-50/50">
                     <th class="p-4 rounded-r-xl">الاسم</th>
+                    <th class="p-4">تكلفة التوصيل</th>
                     <th class="p-4">الحالة</th>
                     <th class="p-4 rounded-l-xl">الإجراءات</th>
                 </tr>
@@ -28,6 +29,9 @@
                 <tr class="border-b border-gray-50 hover:bg-gray-50/50 transition-colors group">
                     <td class="p-4">
                         <span class="font-bold text-[#0B1536]">{{ $area->name }}</span>
+                    </td>
+                    <td class="p-4">
+                        <span class="text-sm font-bold text-emerald-600">{{ number_format($area->delivery_fee, 2) }} ج.م</span>
                     </td>
                     <td class="p-4">
                         @if($area->is_active)
@@ -41,7 +45,7 @@
                         @endif
                     </td>
                     <td class="p-4">
-                        <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div class="flex items-center gap-2">
                             <a href="{{ route('admin.delivery-areas.edit', $area) }}" class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white flex items-center justify-center transition-colors">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                             </a>
@@ -57,7 +61,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3" class="p-8 text-center text-gray-400 font-semibold">
+                    <td colspan="4" class="p-8 text-center text-gray-400 font-semibold">
                         لا توجد مناطق مضافة حتى الآن.
                     </td>
                 </tr>

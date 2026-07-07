@@ -9,9 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Fillable([
     'user_id', 'driver_id', 'store_id', 'order_type', 'pickup_address', 
-    'pickup_lat', 'pickup_lng', 'address_id', 'dropoff_address', 'dropoff_lat', 
-    'dropoff_lng', 'notes', 'image_path', 'invoice_image', 'distance', 
-    'items_total', 'delivery_fee', 'total_amount', 'status'
+    'address_id', 'dropoff_address', 'notes', 'items_total', 
+    'delivery_fee', 'total_amount', 'status'
 ])]
 class Order extends Model
 {

@@ -20,6 +20,8 @@ class DriverSeeder extends Seeder
                 'password' => bcrypt('password'),
                 'role' => 'driver',
                 'is_active' => true,
+                'vehicle_type' => 'motorcycle',
+                'is_available' => true,
             ],
             [
                 'name' => 'محمود علي (مندوب)',
@@ -27,6 +29,8 @@ class DriverSeeder extends Seeder
                 'password' => bcrypt('password'),
                 'role' => 'driver',
                 'is_active' => true,
+                'vehicle_type' => 'bicycle',
+                'is_available' => true,
             ],
             [
                 'name' => 'مصطفى كمال (مندوب)',
@@ -34,6 +38,8 @@ class DriverSeeder extends Seeder
                 'password' => bcrypt('password'),
                 'role' => 'driver',
                 'is_active' => true,
+                'vehicle_type' => 'car',
+                'is_available' => false,
             ],
             [
                 'name' => 'إبراهيم سعيد (مندوب)',
@@ -41,13 +47,28 @@ class DriverSeeder extends Seeder
                 'password' => bcrypt('password'),
                 'role' => 'driver',
                 'is_active' => false,
+                'vehicle_type' => 'motorcycle',
+                'is_available' => false,
             ]
         ];
 
-        foreach ($drivers as $driver) {
-            User::firstOrCreate(
-                ['phone' => $driver['phone']],
-                $driver
+        foreach ($drivers as $data) {
+            $user = User::firstOrCreate(
+                ['phone' => $data['phone']],
+                [
+                    'name' => $data['name'],
+                    'password' => $data['password'],
+                    'role' => $data['role'],
+                    'is_active' => $data['is_active'],
+                ]
+            );
+
+            $user->driverProfile()->firstOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'vehicle_type' => $data['vehicle_type'],
+                    'is_available' => $data['is_available'],
+                ]
             );
         }
     }

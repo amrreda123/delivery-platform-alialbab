@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use App\Services\DriverService;
+use App\Http\Requests\Admin\StoreDriverRequest;
+use App\Http\Requests\Admin\UpdateDriverRequest;
 
 class DriverController extends Controller
 {
+    public function __construct(
+        private readonly DriverService $driverService
+    ) {}
+
     public function index()
     {
-        $drivers = User::where('role', 'driver')->latest()->paginate(15);
+        $drivers = $this->driverService->getPaginatedDrivers();
         return view('admin.drivers.index', compact('drivers'));
     }
 
@@ -20,68 +25,59 @@ class DriverController extends Controller
         return view('admin.drivers.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreDriverRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20|unique:users,phone',
-            'password' => 'required|string|min:6',
-            'is_active' => 'boolean',
-        ]);
+        $this->driverService->assignDriverRole($request->validated());
 
-        User::create([
-            'name' => $validated['name'],
-            'phone' => $validated['phone'],
-            'password' => bcrypt($validated['password']),
-            'role' => 'driver',
-            'is_active' => $request->has('is_active'),
-        ]);
+        return redirect()->route('admin.drivers.index')
+                         ->with('success', 'تم تحويل المستخدم إلى مندوب بنجاح');
+    }
 
-        return redirect()->route('admin.drivers.index')->with('success', 'تم إضافة المندوب بنجاح');
+    public function show(User $driver)
+    {
+        $this->checkDriverRole($driver);
+        
+        $driver->load('driverProfile');
+        $orders = \App\Models\Order::where('driver_id', $driver->id)->with(['customer', 'store'])->latest()->paginate(15);
+        
+        $totalOrders = \App\Models\Order::where('driver_id', $driver->id)->count();
+        $totalDeliveryFees = \App\Models\Order::where('driver_id', $driver->id)->where('status', 'delivered')->sum('delivery_fee');
+
+        return view('admin.drivers.show', compact('driver', 'orders', 'totalOrders', 'totalDeliveryFees'));
     }
 
     public function edit(User $driver)
     {
-        if ($driver->role !== 'driver') {
-            abort(404);
-        }
+        $this->checkDriverRole($driver);
+        
+        $driver->load('driverProfile');
         return view('admin.drivers.edit', compact('driver'));
     }
 
-    public function update(Request $request, User $driver)
+    public function update(UpdateDriverRequest $request, User $driver)
     {
-        if ($driver->role !== 'driver') {
-            abort(404);
-        }
+        $this->checkDriverRole($driver);
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => ['required', 'string', 'max:20', Rule::unique('users')->ignore($driver->id)],
-            'password' => 'nullable|string|min:6',
-            'is_active' => 'boolean',
-        ]);
+        $this->driverService->updateDriverInfo($driver, $request->validated());
 
-        $data = [
-            'name' => $validated['name'],
-            'phone' => $validated['phone'],
-            'is_active' => $request->has('is_active'),
-        ];
-
-        if (!empty($validated['password'])) {
-            $data['password'] = bcrypt($validated['password']);
-        }
-
-        $driver->update($data);
-
-        return redirect()->route('admin.drivers.index')->with('success', 'تم تعديل بيانات المندوب بنجاح');
+        return redirect()->route('admin.drivers.index')
+                         ->with('success', 'تم تعديل بيانات المندوب بنجاح');
     }
 
     public function destroy(User $driver)
     {
-        if ($driver->role !== 'driver') {
+        $this->checkDriverRole($driver);
+
+        $this->driverService->revokeDriverRole($driver);
+
+        return redirect()->route('admin.drivers.index')
+                         ->with('success', 'تم إزالة المندوب ورده كعميل عادي بنجاح');
+    }
+
+    private function checkDriverRole(User $user): void
+    {
+        if ($user->role !== 'driver') {
             abort(404);
         }
-        $driver->delete();
-        return redirect()->route('admin.drivers.index')->with('success', 'تم حذف المندوب بنجاح');
     }
 }

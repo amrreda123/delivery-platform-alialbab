@@ -51,7 +51,7 @@
 </style>
 
 {{-- ====== WELCOME BANNER ====== --}}
-<div class="relative overflow-hidden rounded-3xl mb-7 p-7" style="background: linear-gradient(135deg, #0B1536 0%, #1a2a5e 50%, #111f4d 100%);">
+<div class="relative overflow-hidden rounded-3xl mb-7 p-5 md:p-7" style="background: linear-gradient(135deg, #0B1536 0%, #1a2a5e 50%, #111f4d 100%);">
     {{-- Decorative blobs --}}
     <div class="absolute -top-10 -left-10 w-48 h-48 rounded-full opacity-10" style="background: radial-gradient(circle, #FFC107, transparent 70%);"></div>
     <div class="absolute -bottom-8 left-32 w-32 h-32 rounded-full opacity-10" style="background: radial-gradient(circle, #6366F1, transparent 70%);"></div>
@@ -66,15 +66,15 @@
             <h2 class="text-white font-black text-2xl md:text-3xl mb-1">مرحباً بك مجدداً! 👋</h2>
             <p class="text-white/50 text-sm">لوحة إدارة منصة <span class="text-[#FFC107] font-bold">علي الباب</span> - {{ now()->format('l، d F Y') }}</p>
         </div>
-        <div class="flex gap-3">
-            <a href="{{ route('admin.settings.edit') }}" class="ripple-btn relative flex items-center gap-2 bg-[#FFC107] hover:bg-yellow-400 text-[#0B1536] px-5 py-2.5 rounded-xl font-black text-sm transition-all duration-200 hover:shadow-lg hover:shadow-yellow-500/30 hover:-translate-y-0.5">
+        <div class="flex flex-wrap gap-2 md:gap-3">
+            <a href="{{ route('admin.settings.edit') }}" class="ripple-btn relative flex items-center gap-2 bg-[#FFC107] hover:bg-yellow-400 text-[#0B1536] px-4 md:px-5 py-2.5 rounded-xl font-black text-sm transition-all duration-200 hover:shadow-lg hover:shadow-yellow-500/30 hover:-translate-y-0.5">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                 </svg>
                 الإعدادات
             </a>
-            <a href="{{ route('home') }}" target="_blank" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 border border-white/10">
+            <a href="{{ route('home') }}" target="_blank" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 md:px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 border border-white/10">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                 </svg>
@@ -85,20 +85,20 @@
 </div>
 
 {{-- ====== KPI CARDS ====== --}}
-<div class="grid grid-cols-2 xl:grid-cols-4 gap-5 mb-7">
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-5 mb-7">
 
     @php
         $kpis = [
-            ['label'=>'إجمالي الطلبات','value'=>'0','sub'=>'لا يوجد بعد','change'=>'جديد','color'=>'#6366F1','progress'=>'15%','shadow'=>'rgba(99,102,241,0.25)',
+            ['label'=>'الطلبات المعلقة','value'=> $stats['pending_orders'] ?? 0,'sub'=>'بانتظار الموافقة','change'=>'محدث','color'=>'#6366F1','progress'=>'100%','shadow'=>'rgba(99,102,241,0.25)',
              'gradient'=>'from-[#6366F1] to-[#4F46E5]','badge'=>'bg-indigo-50 text-indigo-600',
              'icon'=>'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>'],
-            ['label'=>'الإيرادات','value'=>'0 ج.م','sub'=>'لا يوجد بعد','change'=>'جديد','color'=>'#F59E0B','progress'=>'10%','shadow'=>'rgba(245,158,11,0.25)',
+            ['label'=>'إجمالي المبيعات','value'=> number_format($stats['total_revenue'] ?? 0, 2) . ' ج.م','sub'=>'قيمة المنتجات والتوصيل','change'=>'محدث','color'=>'#F59E0B','progress'=>'100%','shadow'=>'rgba(245,158,11,0.25)',
              'gradient'=>'from-[#FFC107] to-[#F59E0B]','badge'=>'bg-amber-50 text-amber-600',
              'icon'=>'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>'],
-            ['label'=>'المستخدمون','value'=>'0','sub'=>'لا يوجد بعد','change'=>'جديد','color'=>'#10B981','progress'=>'20%','shadow'=>'rgba(16,185,129,0.25)',
+            ['label'=>'العملاء','value'=> $stats['total_customers'] ?? 0,'sub'=>'عميل مسجل','change'=>'محدث','color'=>'#10B981','progress'=>'100%','shadow'=>'rgba(16,185,129,0.25)',
              'gradient'=>'from-[#10B981] to-[#059669]','badge'=>'bg-emerald-50 text-emerald-600',
              'icon'=>'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>'],
-            ['label'=>'مناطق التوصيل','value'=>'0','sub'=>'لا يوجد بعد','change'=>'جديد','color'=>'#F97316','progress'=>'5%','shadow'=>'rgba(249,115,22,0.25)',
+            ['label'=>'مناطق التوصيل','value'=> $stats['total_delivery_areas'] ?? 0,'sub'=>'منطقة مدعومة','change'=>'محدث','color'=>'#F97316','progress'=>'100%','shadow'=>'rgba(249,115,22,0.25)',
              'gradient'=>'from-[#F97316] to-[#EA580C]','badge'=>'bg-orange-50 text-orange-600',
              'icon'=>'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>'],
         ];
@@ -149,7 +149,7 @@
                 </div>
                 ملخص الأرباح
             </h3>
-            <span class="text-[10px] text-gray-400 font-bold bg-gray-50 px-2.5 py-1 rounded-full border border-gray-100">قريباً.. جاري العمل على برمجتها</span>
+            <span class="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">محدث تلقائياً</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
@@ -159,7 +159,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
                 </svg>
                 <p class="text-emerald-100 text-sm font-semibold mb-1 opacity-90">الأرباح اليومية</p>
-                <h4 class="text-3xl font-black tracking-tight drop-shadow-md">0 <span class="text-lg font-bold text-emerald-200">ج.م</span></h4>
+                <h4 class="text-3xl font-black tracking-tight drop-shadow-md">{{ number_format($stats['daily_profits'] ?? 0, 2) }} <span class="text-lg font-bold text-emerald-200">ج.م</span></h4>
                 <div class="mt-3 text-xs font-medium text-emerald-100 bg-black/10 self-start px-2 py-1 rounded-lg backdrop-blur-sm">
                     أرباح اليوم الحالي
                 </div>
@@ -171,7 +171,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                 </svg>
                 <p class="text-indigo-200 text-sm font-semibold mb-1 opacity-90">الأرباح الشهرية</p>
-                <h4 class="text-3xl font-black tracking-tight drop-shadow-md">0 <span class="text-lg font-bold text-indigo-300">ج.م</span></h4>
+                <h4 class="text-3xl font-black tracking-tight drop-shadow-md">{{ number_format($stats['monthly_profits'] ?? 0, 2) }} <span class="text-lg font-bold text-indigo-300">ج.م</span></h4>
                 <div class="mt-3 text-xs font-medium text-indigo-200 bg-white/10 self-start px-2 py-1 rounded-lg backdrop-blur-sm">
                     أرباح الشهر الحالي
                 </div>
@@ -239,9 +239,9 @@
 
 {{-- ====== SETTINGS PREVIEW TABLE ====== --}}
 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-50">
+    <div class="flex flex-wrap items-center justify-between px-6 py-4 border-b border-gray-50 gap-4">
         <h3 class="font-black text-[#0B1536] text-sm flex items-center gap-2">
-            <div class="w-7 h-7 rounded-lg bg-[#FFC107]/10 flex items-center justify-center">
+            <div class="w-7 h-7 rounded-lg bg-[#FFC107]/10 flex items-center justify-center shrink-0">
                 <svg class="w-3.5 h-3.5 text-[#FFC107]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -271,7 +271,7 @@
             ];
             $info = $icons[$key] ?? ['bg'=>'bg-gray-50','text'=>'text-gray-400','label'=>$key];
         @endphp
-        <div class="group flex items-center justify-between px-6 py-3.5 hover:bg-gray-50/60 transition-colors">
+        <div class="group flex flex-col sm:flex-row sm:items-center justify-between px-6 py-4 sm:py-3.5 hover:bg-gray-50/60 transition-colors gap-3 sm:gap-0">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-xl {{ $info['bg'] }} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-200">
                     <svg class="w-3.5 h-3.5 {{ $info['text'] }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -283,9 +283,9 @@
                     <p class="text-[10px] text-gray-300 font-mono">{{ $key }}</p>
                 </div>
             </div>
-            <div class="flex items-center justify-end gap-2 w-[60%]">
+            <div class="flex items-center justify-end gap-2 w-full sm:w-[60%]">
                 {{-- Value Pill --}}
-                <div class="flex-1 bg-gray-50/80 border border-gray-100 rounded-lg px-3 py-2 flex items-center justify-end transition-colors group-hover:bg-white group-hover:border-gray-200 shadow-sm">
+                <div class="flex-1 bg-gray-50/80 border border-gray-100 rounded-lg px-3 py-2 flex items-center justify-end transition-colors group-hover:bg-white group-hover:border-gray-200 shadow-sm overflow-hidden">
                     <span class="text-[11px] font-semibold text-gray-500 font-mono truncate text-left w-full" dir="ltr">{{ empty($value) ? '---' : $value }}</span>
                 </div>
                 
@@ -298,7 +298,7 @@
                 </a>
                 @else
                 {{-- Placeholder to keep perfect alignment for items without link --}}
-                <div class="shrink-0 w-8 h-8"></div>
+                <div class="shrink-0 w-8 h-8 hidden sm:block"></div>
                 @endif
             </div>
         </div>

@@ -9,7 +9,7 @@ class CategoryService
 {
     public function getAllCategories()
     {
-        return Category::withCount('stores')->latest()->get();
+        return Category::with('stores')->withCount('stores')->latest()->get();
     }
 
     public function createCategory(array $data): Category

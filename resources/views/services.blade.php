@@ -148,16 +148,16 @@
             @endforeach
             
             <!-- Service: Corporate -->
-            <div onclick="window.location.href='tel:01097752649'" data-aos="fade-up" data-aos-delay="600" class="group bg-[#FAFAFA] rounded-[24px] p-8 border border-dashed border-gray-300 hover:border-gray-400 hover:bg-gray-100 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-pointer">
+            <a href="tel:01097752649" data-aos="fade-up" data-aos-delay="600" class="group bg-[#FAFAFA] rounded-[24px] p-8 border border-dashed border-gray-300 hover:border-gray-400 hover:bg-gray-100 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-pointer block">
                 <div class="w-16 h-16 mb-4 rounded-full bg-white flex items-center justify-center text-gray-400 group-hover:scale-110 group-hover:text-gray-700 transition-all duration-300 shadow-sm">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                 </div>
                 <h3 class="text-xl font-bold text-[#0B1536] mb-2">خدمات للشركات؟</h3>
                 <p class="text-gray-500 text-sm mb-5">نوفر حلول لوجستية وتوصيل مخصصة لأصحاب المتاجر والمطاعم بأسعار خاصة.</p>
-                <button class="px-6 py-2 bg-white border border-gray-200 text-gray-700 rounded-xl font-bold group-hover:bg-gray-800 group-hover:text-white transition-colors duration-300 shadow-sm">
+                <div class="px-6 py-2 bg-white border border-gray-200 text-gray-700 rounded-xl font-bold group-hover:bg-gray-800 group-hover:text-white transition-colors duration-300 shadow-sm">
                     تواصل معنا
-                </button>
-            </div>
+                </div>
+            </a>
         </div>
     </div>
 </section>

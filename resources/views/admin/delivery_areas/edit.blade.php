@@ -18,6 +18,12 @@
                     @error('name')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
 
+                <div>
+                    <label class="block text-sm font-bold text-[#0B1536] mb-2">تكلفة التوصيل (ج.م) <span class="text-red-500">*</span></label>
+                    <input type="number" step="0.01" min="0" name="delivery_fee" value="{{ old('delivery_fee', $deliveryArea->delivery_fee) }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FFC107] focus:ring-2 focus:ring-yellow-100 transition-all outline-none bg-gray-50 focus:bg-white text-sm font-semibold" placeholder="أدخل تكلفة التوصيل لهذه المنطقة">
+                    @error('delivery_fee')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                </div>
+
                 <div class="pt-2">
                     <label class="flex items-center gap-3 cursor-pointer w-max">
                         <input type="hidden" name="is_active" value="0">

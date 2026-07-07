@@ -5,13 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Services\OrderService;
+use App\Http\Requests\Admin\UpdateOrderRequest;
 
 class OrderController extends Controller
 {
+    public function __construct(
+        private readonly OrderService $orderService
+    ) {}
+
     public function index()
     {
-        $orders = Order::with(['customer', 'store', 'driver'])->latest()->paginate(15);
+        $orders = $this->orderService->getPaginatedAdminOrders();
         return view('admin.orders.index', compact('orders'));
     }
 
@@ -22,18 +27,10 @@ class OrderController extends Controller
         return view('admin.orders.show', compact('order', 'drivers'));
     }
 
-    public function update(Request $request, Order $order)
+    public function update(UpdateOrderRequest $request, Order $order)
     {
-        $request->validate([
-            'status' => 'required|in:pending,accepted,on_the_way,delivered',
-            'driver_id' => 'nullable|exists:users,id'
-        ]);
+        $this->orderService->updateAdminOrder($order, $request->validated());
 
-        $order->update([
-            'status' => $request->status,
-            'driver_id' => $request->driver_id
-        ]);
-
-        return back()->with('success', 'تم تحديث الطلب بنجاح.');
+        return redirect()->back()->with('success', 'تم تحديث حالة الطلب بنجاح.');
     }
 }

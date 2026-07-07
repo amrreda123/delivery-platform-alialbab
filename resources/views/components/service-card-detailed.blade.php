@@ -59,7 +59,7 @@
     $actionTextColor = explode(' ', $textColor)[1] ?? 'text-yellow-600';
 @endphp
 
-<div onclick="window.location.href='tel:01097752649'" data-aos="fade-up" data-aos-delay="{{ $delay }}" class="group bg-white rounded-[24px] p-8 border border-gray-100 hover-lift {{ $borderColor }} {{ $shadowColor }} transition-all duration-500 cursor-pointer flex flex-col items-start text-right">
+<a href="{{ route('order.create', $category->id) }}" data-aos="fade-up" data-aos-delay="{{ $delay }}" class="group bg-white rounded-[24px] p-8 border border-gray-100 hover-lift {{ $borderColor }} {{ $shadowColor }} transition-all duration-500 cursor-pointer flex flex-col items-start text-right block">
     {!! $iconHtml !!}
     <h3 class="text-xl font-bold text-[#0B1536] mb-3 {{ $titleHoverColor }} transition-colors w-full truncate">{{ $category->name }}</h3>
     <p class="text-gray-500 text-sm leading-relaxed mb-4 group-hover:text-gray-600 transition-colors w-full">{{ $description }}</p>
@@ -67,4 +67,4 @@
         {{ $action }}
         <svg class="w-4 h-4 rotate-180 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
     </div>
-</div>
+</a>
