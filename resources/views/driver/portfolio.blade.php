@@ -76,10 +76,10 @@
                     <div class="flex flex-col items-end gap-2">
                         @if($order->status == 'pending')
                             <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1.5 rounded-lg">قيد الانتظار</span>
-                        @elseif($order->status == 'processing')
-                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5 rounded-lg">قيد التجهيز</span>
-                        @elseif($order->status == 'delivering')
-                            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1.5 rounded-lg border border-purple-200">جاري التوصيل</span>
+                        @elseif($order->status == 'accepted')
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5 rounded-lg">تم القبول</span>
+                        @elseif($order->status == 'on_the_way')
+                            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1.5 rounded-lg border border-purple-200">في الطريق</span>
                         @elseif($order->status == 'delivered')
                             <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1.5 rounded-lg">مكتمل</span>
                         @elseif($order->status == 'cancelled')
@@ -92,8 +92,8 @@
                             @csrf
                             @method('PUT')
                             <select name="status" class="text-xs bg-gray-50 border border-gray-200 rounded-lg px-2 py-1 font-bold text-gray-700 outline-none focus:border-[#FFC107]">
-                                <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>قيد التجهيز</option>
-                                <option value="delivering" {{ $order->status == 'delivering' ? 'selected' : '' }}>جاري التوصيل</option>
+                                <option value="accepted" {{ $order->status == 'accepted' ? 'selected' : '' }}>تم القبول</option>
+                                <option value="on_the_way" {{ $order->status == 'on_the_way' ? 'selected' : '' }}>في الطريق</option>
                                 <option value="delivered">مكتمل (تم التوصيل)</option>
                             </select>
                             <button type="submit" class="bg-[#0B1536] text-white p-1 rounded-lg hover:bg-gray-800 transition">

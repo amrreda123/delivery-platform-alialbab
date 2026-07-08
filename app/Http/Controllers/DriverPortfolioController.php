@@ -46,7 +46,7 @@ class DriverPortfolioController extends Controller
         }
 
         $request->validate([
-            'status' => 'required|in:pending,processing,delivering,delivered,cancelled'
+            'status' => 'required|in:pending,accepted,on_the_way,delivered'
         ]);
 
         $order->update(['status' => $request->status]);
