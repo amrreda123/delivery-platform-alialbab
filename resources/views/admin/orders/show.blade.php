@@ -5,50 +5,65 @@
 @section('page-subtitle', 'عرض تفاصيل الطلب وتحديث حالته')
 
 @section('content')
-<style type="text/css" media="print">
-    @page { margin: 1cm; }
-    body * { visibility: hidden; }
-    
-    /* Show only the print-invoice element and its children */
-    #print-invoice, #print-invoice * { 
-        visibility: visible; 
+<style type="text/css">
+    @media screen {
+        #print-invoice { display: none !important; }
     }
     
-    #print-invoice {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        width: 100%;
-        margin: 0;
-        padding: 20px;
-        background: white !important;
-        color: black !important;
-        font-family: Arial, sans-serif;
-        direction: rtl;
-    }
+    @media print {
+        @page { margin: 1cm; }
+        body * { visibility: hidden; }
+        
+        /* Show only the print-invoice element and its children */
+        #print-invoice, #print-invoice * { 
+            visibility: visible; 
+            display: block !important;
+        }
+        
+        #print-invoice {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            width: 100%;
+            margin: 0;
+            padding: 20px;
+            background: white !important;
+            color: black !important;
+            font-family: Arial, sans-serif;
+            direction: rtl;
+        }
 
-    /* Professional Black & White styling */
-    #print-invoice table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
+        /* Professional Black & White styling */
+        #print-invoice table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        #print-invoice th, #print-invoice td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: right;
+            display: table-cell !important;
+        }
+        #print-invoice tr {
+            display: table-row !important;
+        }
+        #print-invoice th {
+            background-color: #f0f0f0 !important;
+            -webkit-print-color-adjust: exact;
+        }
+        #print-invoice h1, #print-invoice h2, #print-invoice h3, #print-invoice p, #print-invoice span, #print-invoice strong {
+            color: #000 !important;
+            margin: 5px 0;
+            display: inline-block !important;
+        }
+        #print-invoice h1, #print-invoice p {
+            display: block !important;
+        }
+        
+        .print-hidden { display: none !important; }
     }
-    #print-invoice th, #print-invoice td {
-        border: 1px solid #000;
-        padding: 10px;
-        text-align: right;
-    }
-    #print-invoice th {
-        background-color: #f0f0f0 !important;
-        -webkit-print-color-adjust: exact;
-    }
-    #print-invoice h1, #print-invoice h2, #print-invoice h3, #print-invoice p {
-        color: #000 !important;
-        margin: 5px 0;
-    }
-    
-    .print-hidden { display: none !important; }
 </style>
 
 @php
@@ -248,7 +263,7 @@
 </div>
 
 <!-- Printable Invoice Container (Hidden on screen) -->
-<div id="print-invoice" class="hidden">
+<div id="print-invoice">
     <div style="text-align: center; margin-bottom: 30px;">
         <h1 style="font-size: 24px; font-weight: bold; margin-bottom: 5px;">فاتورة طلب - علي الباب</h1>
         <p>رقم الطلب: #{{ $order->id }}</p>
