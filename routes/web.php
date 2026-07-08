@@ -41,8 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile/settings', [CustomerProfileController::class, 'updateSettings'])->name('profile.settings.update');
 
     // Driver Portfolio
-    Route::get('/driver/portfolio', [\App\Http\Controllers\DriverPortfolioController::class, 'index'])->name('driver.portfolio');
-    Route::put('/driver/portfolio/orders/{order}/status', [\App\Http\Controllers\DriverPortfolioController::class, 'updateStatus'])->name('driver.portfolio.update-status');
+    Route::get('/driver/portfolio', [DriverPortfolioController::class, 'index'])->name('driver.portfolio');
+    Route::put('/driver/portfolio/orders/{order}/status', [DriverPortfolioController::class, 'updateStatus'])->name('driver.portfolio.update-status');
+    Route::get('/driver/portfolio/orders/{order}/print', [DriverPortfolioController::class, 'printOrder'])->name('driver.portfolio.print-order');
 });
 
 Route::get('/category/{category}/order', [OrderController::class, 'create'])->name('order.create');

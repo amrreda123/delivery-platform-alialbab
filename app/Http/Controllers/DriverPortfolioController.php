@@ -53,4 +53,21 @@ class DriverPortfolioController extends Controller
 
         return back()->with('success', 'تم تحديث حالة الطلب بنجاح.');
     }
+
+    public function printOrder(Order $order)
+    {
+        $user = Auth::user();
+
+        // Ensure only drivers can access this
+        if ($user->role !== 'driver') {
+            abort(403, 'Unauthorized action.');
+        }
+
+        // Ensure the driver is assigned to this order
+        if ($order->driver_id !== $user->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return view('driver.print', compact('order'));
+    }
 }
