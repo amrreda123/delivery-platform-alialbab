@@ -128,14 +128,22 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-50 rounded-2xl p-4 flex items-center justify-between">
-                    <div>
-                        <p class="text-xs text-gray-500 font-bold mb-1">المبلغ المطلوب تحصيله (الإجمالي)</p>
-                        <p class="text-lg font-black text-[#0B1536]">{{ number_format($order->total_amount, 2) }} ج.م</p>
+                <div class="bg-gray-50 rounded-2xl p-4 space-y-3">
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-gray-500 font-bold">ثمن المشتريات:</span>
+                        <span class="font-bold text-gray-800">{{ number_format($order->items_total, 2) }} ج.م</span>
                     </div>
-                    <div class="text-right">
-                        <p class="text-xs text-gray-500 font-bold mb-1">رسوم التوصيل (نصيبك)</p>
-                        <p class="text-lg font-black text-green-600">{{ number_format($order->delivery_fee, 2) }} ج.م</p>
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-gray-500 font-bold">رسوم التوصيل (نصيبك):</span>
+                        <span class="font-bold text-green-600">{{ number_format($order->delivery_fee, 2) }} ج.م</span>
+                    </div>
+                    <hr class="border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="block text-sm text-[#0B1536] font-bold">المبلغ المطلوب تحصيله من العميل</span>
+                            <span class="block text-xs text-gray-400 font-bold mt-0.5">(المشتريات + التوصيل)</span>
+                        </div>
+                        <span class="text-xl font-black text-[#0B1536]">{{ number_format($order->total_amount, 2) }} ج.م</span>
                     </div>
                 </div>
                 
