@@ -64,6 +64,7 @@ Route::prefix('dashboard')->name('admin.')->group(function () {
         Route::resource('stores', StoreController::class)->except(['show']);
         Route::resource('delivery-areas', DeliveryAreaController::class)->except(['show']);
         Route::resource('drivers', DriverController::class);
+        Route::post('users/{user}/convert-to-driver', [UserController::class, 'convertToDriver'])->name('users.convert-to-driver');
         Route::resource('users', UserController::class);
         
         Route::resource('orders', AdminOrderController::class)->only(['index', 'show', 'update']);

@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Services\UserService;
 use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
-
+use App\Models\Order;
 class UserController extends Controller
 {
     public function __construct(
@@ -36,11 +36,11 @@ class UserController extends Controller
     {
         $this->checkCustomerRole($user);
         
-        $orders = \App\Models\Order::where('user_id', $user->id)->with(['store', 'driver'])->latest()->paginate(15);
+        $orders = Order::where('user_id', $user->id)->with(['store', 'driver'])->latest()->paginate(15);
         
-        $totalOrders = \App\Models\Order::where('user_id', $user->id)->count();
+        $totalOrders = Order::where('user_id', $user->id)->count();
         // Calculate total delivery fees spent by customer (only for delivered orders)
-        $totalSpent = \App\Models\Order::where('user_id', $user->id)->where('status', 'delivered')->sum('delivery_fee');
+        $totalSpent = Order::where('user_id', $user->id)->where('status', 'delivered')->sum('delivery_fee');
 
         return view('admin.users.show', compact('user', 'orders', 'totalOrders', 'totalSpent'));
     }
@@ -68,6 +68,25 @@ class UserController extends Controller
         $this->userService->deleteCustomer($user);
         
         return redirect()->route('admin.users.index')->with('success', 'تم حذف العميل بنجاح');
+    }
+
+    public function convertToDriver(User $user)
+    {
+        $this->checkCustomerRole($user);
+
+        // Change role to driver
+        $user->update(['role' => 'driver']);
+
+        // Create a default driver profile if one doesn't exist
+        $user->driverProfile()->firstOrCreate(
+            ['user_id' => $user->id],
+            [
+                'vehicle_type' => 'motorcycle', // default
+                'is_available' => true,
+            ]
+        );
+
+        return redirect()->route('admin.drivers.index')->with('success', 'تم تحويل العميل إلى مندوب بنجاح. يمكنك الآن تعديل بياناته.');
     }
 
     private function checkCustomerRole(User $user): void

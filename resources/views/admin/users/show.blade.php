@@ -7,7 +7,7 @@
 @section('content')
 <div class="space-y-6">
     <!-- Customer Info & Stats -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Customer Profile -->
         <div class="glass-card p-6 flex items-center gap-4 border-r-4 border-[#0B1536]">
@@ -21,6 +21,18 @@
                     {{ $user->phone }}
                 </div>
             </div>
+        </div>
+
+        <!-- Action Card -->
+        <div class="glass-card p-6 flex flex-col justify-center gap-3 border-r-4 border-[#FFC107]">
+            <h4 class="text-sm font-semibold text-gray-500 mb-2">إجراءات إضافية</h4>
+            <form action="{{ route('admin.users.convert-to-driver', $user->id) }}" method="POST" onsubmit="return confirm('هل أنت متأكد من تحويل هذا العميل إلى مندوب توصيل؟');">
+                @csrf
+                <button type="submit" class="w-full flex items-center justify-center gap-2 bg-[#0B1536] text-white font-bold rounded-xl px-4 py-3 hover:bg-blue-900 transition-colors shadow-lg shadow-blue-900/30">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    ترقية العميل إلى "مندوب توصيل"
+                </button>
+            </form>
         </div>
 
         <!-- Total Orders Stat -->
