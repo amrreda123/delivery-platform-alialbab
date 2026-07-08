@@ -17,6 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo(fn (Request $request) => $request->is('dashboard*') ? route('admin.login') : route('customer.login'));
         $middleware->alias([
             'is_admin' => IsAdmin::class,
+            'is_customer' => IsCustomer::class,
+            'is_driver' => \App\Http\Middleware\IsDriver::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

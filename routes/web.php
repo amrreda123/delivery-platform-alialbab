@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\DeliveryAreaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\CustomerAuthController;
-
+use App\Http\Controllers\DriverPortfolioController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
@@ -36,14 +36,20 @@ Route::post('/logout', [CustomerAuthController::class, 'logout'])->name('custome
 
 // Customer & Driver Profile / Orders
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [CustomerProfileController::class, 'index'])->name('profile');
-    Route::get('/profile/settings', [CustomerProfileController::class, 'settings'])->name('profile.settings');
-    Route::put('/profile/settings', [CustomerProfileController::class, 'updateSettings'])->name('profile.settings.update');
+    
+    // Customer Only Routes
+    Route::middleware('is_customer')->group(function () {
+        Route::get('/profile', [CustomerProfileController::class, 'index'])->name('profile');
+        Route::get('/profile/settings', [CustomerProfileController::class, 'settings'])->name('profile.settings');
+        Route::put('/profile/settings', [CustomerProfileController::class, 'updateSettings'])->name('profile.settings.update');
+    });
 
-    // Driver Portfolio
-    Route::get('/driver/portfolio', [DriverPortfolioController::class, 'index'])->name('driver.portfolio');
-    Route::put('/driver/portfolio/orders/{order}/status', [DriverPortfolioController::class, 'updateStatus'])->name('driver.portfolio.update-status');
-    Route::get('/driver/portfolio/orders/{order}/print', [DriverPortfolioController::class, 'printOrder'])->name('driver.portfolio.print-order');
+    // Driver Only Routes
+    Route::middleware('is_driver')->group(function () {
+        Route::get('/driver/portfolio', [DriverPortfolioController::class, 'index'])->name('driver.portfolio');
+        Route::put('/driver/portfolio/orders/{order}/status', [DriverPortfolioController::class, 'updateStatus'])->name('driver.portfolio.update-status');
+        Route::get('/driver/portfolio/orders/{order}/print', [DriverPortfolioController::class, 'printOrder'])->name('driver.portfolio.print-order');
+    });
 });
 
 Route::get('/category/{category}/order', [OrderController::class, 'create'])->name('order.create');
