@@ -21,10 +21,17 @@ class CustomerAuthService
         $credentials = [
             'email' => $request->email,
             'password' => $request->password,
-            'role' => 'customer'
         ];
         
-        return Auth::attempt($credentials, $request->boolean('remember'));
+        // Find user to check role
+        $user = User::where('email', $request->email)->first();
+
+        // Allow both customer and driver to login from frontend
+        if ($user && in_array($user->role, ['customer', 'driver'])) {
+            return Auth::attempt($credentials, $request->boolean('remember'));
+        }
+
+        return false;
     }
 
     /**
