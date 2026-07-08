@@ -14,7 +14,7 @@ class AdminSeeder extends Seeder
         User::updateOrCreate(
             ['email' => config('auth.admin_email')],
             [
-                'name' => 'مدير النظام الأول',
+                'name' => 'Mohamed Naser ',
                 'password' => Hash::make(config('auth.admin_password')),
                 'role' => 'admin',
                 'phone' => config('auth.admin_phone'),
