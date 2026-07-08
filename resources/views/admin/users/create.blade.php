@@ -22,10 +22,21 @@
                     @enderror
                 </div>
 
+                <!-- Email -->
+                <div>
+                    <label class="block text-sm font-bold text-[#0B1536] mb-2">البريد الإلكتروني</label>
+                    <input type="email" name="email" value="{{ old('email') }}" required dir="ltr"
+                           class="w-full text-left bg-gray-50 border @error('email') border-red-500 @else border-gray-200 @enderror text-gray-900 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#FFC107] focus:border-transparent transition-all outline-none"
+                           placeholder="مثال: customer@example.com">
+                    @error('email')
+                        <p class="text-red-500 text-xs font-bold mt-2">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Phone -->
                 <div>
-                    <label class="block text-sm font-bold text-[#0B1536] mb-2">رقم الهاتف (لتسجيل الدخول)</label>
-                    <input type="text" name="phone" value="{{ old('phone') }}" required dir="ltr"
+                    <label class="block text-sm font-bold text-[#0B1536] mb-2">رقم الهاتف</label>
+                    <input type="tel" name="phone" value="{{ old('phone') }}" required dir="ltr"
                            class="w-full text-left bg-gray-50 border @error('phone') border-red-500 @else border-gray-200 @enderror text-gray-900 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#FFC107] focus:border-transparent transition-all outline-none"
                            placeholder="مثال: 01xxxxxxxxx">
                     @error('phone')

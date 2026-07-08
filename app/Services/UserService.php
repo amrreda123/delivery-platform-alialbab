@@ -15,6 +15,7 @@ class UserService
     {
         User::create([
             'name' => $data['name'],
+            'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => bcrypt($data['password']),
             'role' => 'customer',

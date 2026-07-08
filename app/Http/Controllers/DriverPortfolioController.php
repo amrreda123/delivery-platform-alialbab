@@ -83,16 +83,12 @@ class DriverPortfolioController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:50|min:3',
-            'password' => 'nullable|string|min:8|confirmed',
             'vehicle_type' => 'required|in:motorcycle,car,bicycle,van',
             'is_available' => 'boolean',
         ]);
 
         // Update User info
         $user->name = $request->name;
-        if ($request->filled('password')) {
-            $user->password = bcrypt($request->password);
-        }
         $user->save();
 
         // Update or Create Driver Profile

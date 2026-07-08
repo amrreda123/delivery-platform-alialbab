@@ -75,28 +75,6 @@
                 </label>
             </div>
 
-            <hr class="border-gray-100 my-6">
-
-            <!-- Password -->
-            <h3 class="text-lg font-bold text-[#0B1536] mb-4">تغيير كلمة المرور</h3>
-            <p class="text-xs text-gray-500 mb-4">اترك الحقول فارغة إذا كنت لا ترغب في تغيير كلمة المرور.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label for="password" class="block text-sm font-bold text-gray-700 mb-2">كلمة المرور الجديدة</label>
-                    <input type="password" id="password" name="password" dir="ltr"
-                           class="w-full bg-gray-50 border @error('password') border-red-300 @else border-gray-200 @enderror text-gray-900 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#FFC107] outline-none font-medium transition text-left">
-                    @error('password')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div>
-                    <label for="password_confirmation" class="block text-sm font-bold text-gray-700 mb-2">تأكيد كلمة المرور</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" dir="ltr"
-                           class="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#FFC107] outline-none font-medium transition text-left">
-                </div>
-            </div>
-
             <div class="mt-8 pt-4">
                 <button type="submit" class="w-full flex items-center justify-center gap-2 bg-[#FFC107] hover:bg-yellow-500 text-[#0B1536] font-black rounded-xl px-6 py-4 transition-all shadow-lg shadow-yellow-500/30">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
