@@ -343,7 +343,30 @@
                     <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
                 </button>
                 {{-- Avatar --}}
-                <div class="w-9 h-9 bg-gradient-to-br from-[#FFC107] to-[#F59E0B] rounded-xl flex items-center justify-center text-[#0B1536] font-black text-sm shadow-lg cursor-pointer hover:shadow-xl transition-shadow">م</div>
+                <div class="relative" id="profile-dropdown-container">
+                    <button onclick="toggleProfileDropdown()" class="w-9 h-9 bg-gradient-to-br from-[#FFC107] to-[#F59E0B] rounded-xl flex items-center justify-center text-[#0B1536] font-black text-sm shadow-lg cursor-pointer hover:shadow-xl transition-shadow focus:outline-none">
+                        م
+                    </button>
+
+                    {{-- Dropdown Menu --}}
+                    <div id="profile-dropdown" class="hidden absolute left-0 mt-3 w-56 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] py-2 border border-gray-100 z-50 origin-top-left transition-all duration-200 opacity-0 scale-95 pointer-events-none">
+                        <div class="px-4 py-3 border-b border-gray-50 flex flex-col gap-1">
+                            <span class="text-sm text-[#0B1536] font-bold">{{ auth()->user()?->name ?? 'المدير العام' }}</span>
+                            <span class="text-xs text-gray-500">{{ auth()->user()?->email ?? 'admin@ala-elbab.com' }}</span>
+                        </div>
+                        <a href="{{ route('admin.settings.edit') }}" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#0B1536] transition-colors">
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            إعدادات النظام
+                        </a>
+                        <form method="POST" action="{{ route('admin.logout') }}" class="block w-full m-0">
+                            @csrf
+                            <button type="submit" class="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors text-right font-medium">
+                                <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                                تسجيل الخروج
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -409,6 +432,39 @@
             overlay.classList.add('hidden');
         }
     }
+
+    function toggleProfileDropdown() {
+        const dropdown = document.getElementById('profile-dropdown');
+        if (dropdown.classList.contains('opacity-0')) {
+            dropdown.classList.remove('hidden');
+            // Allow display to update before transitioning
+            setTimeout(() => {
+                dropdown.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+                dropdown.classList.add('opacity-100', 'scale-100');
+            }, 10);
+        } else {
+            dropdown.classList.remove('opacity-100', 'scale-100');
+            dropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+            setTimeout(() => {
+                dropdown.classList.add('hidden');
+            }, 200);
+        }
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        const container = document.getElementById('profile-dropdown-container');
+        const dropdown = document.getElementById('profile-dropdown');
+        if (container && !container.contains(event.target)) {
+            if (!dropdown.classList.contains('opacity-0')) {
+                dropdown.classList.remove('opacity-100', 'scale-100');
+                dropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                setTimeout(() => {
+                    dropdown.classList.add('hidden');
+                }, 200);
+            }
+        }
+    });
 </script>
 
 </body>

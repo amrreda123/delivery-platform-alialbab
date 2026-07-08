@@ -107,9 +107,9 @@
             <div data-aos="fade-up" data-aos-delay="100" class="relative bg-white rounded-[32px] p-8 md:p-10 border border-gray-100 shadow-xl overflow-hidden flex flex-col md:flex-row items-center gap-8 hover-lift cursor-pointer group">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-red-500 rounded-full mix-blend-multiply filter blur-[64px] opacity-20 group-hover:scale-150 group-hover:opacity-30 transition-all duration-700"></div>
                 <div class="relative z-10 flex-1">
-                    <span class="inline-block px-3 py-1 bg-red-100 text-red-600 rounded-lg text-sm font-bold mb-4 animate-pulse">🔥 عرض جديد</span>
-                    <h3 class="text-2xl font-bold text-[#0B1536] mb-3 group-hover:text-red-600 transition-colors">توصيل مجاني لطلبك الأول!</h3>
-                    <p class="text-gray-500 mb-6 leading-relaxed">استخدم كود <span class="font-bold text-[#0B1536] bg-gray-100 px-2 py-1 rounded border border-gray-200">WELCOME</span> واحصل على توصيل مجاني بالكامل لأول أوردر ليك من أي مكان.</p>
+                    <span class="inline-block px-3 py-1 bg-red-100 text-red-600 rounded-lg text-sm font-bold mb-4 animate-pulse">🎁 ولاء العملاء</span>
+                    <h3 class="text-2xl font-bold text-[#0B1536] mb-3 group-hover:text-red-600 transition-colors">أوردر هدية على كل 10 أوردرات!</h3>
+                    <p class="text-gray-500 mb-6 leading-relaxed">عشان إنت عميل مميز، جمع 10 أوردرات من خلالنا و <span class="font-bold text-[#0B1536] bg-gray-100 px-2 py-1 rounded border border-gray-200">الأوردر الـ 11 علينا هدية</span> مكافأة ليك.</p>
                 </div>
                 <div class="relative z-10 w-32 h-32 shrink-0 bg-red-50 rounded-2xl flex items-center justify-center border border-red-100 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 shadow-inner">
                     <span class="text-5xl drop-shadow-md">🎁</span>
@@ -120,12 +120,12 @@
             <div data-aos="fade-up" data-aos-delay="200" class="relative bg-white rounded-[32px] p-8 md:p-10 border border-gray-100 shadow-xl overflow-hidden flex flex-col md:flex-row items-center gap-8 hover-lift cursor-pointer group">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-[#FFC107] rounded-full mix-blend-multiply filter blur-[64px] opacity-20 group-hover:scale-150 group-hover:opacity-30 transition-all duration-700"></div>
                 <div class="relative z-10 flex-1">
-                    <span class="inline-block px-3 py-1 bg-yellow-100 text-yellow-700 rounded-lg text-sm font-bold mb-4 animate-pulse">⭐ عروض المطاعم</span>
-                    <h3 class="text-2xl font-bold text-[#0B1536] mb-3 group-hover:text-yellow-600 transition-colors">خصم 20% على وجبة الغداء</h3>
-                    <p class="text-gray-500 mb-6 leading-relaxed">اطلب من مطاعمك المفضلة بين الساعة 2 لـ 5 العصر واستمتع بخصم فوري على التوصيل.</p>
+                    <span class="inline-block px-3 py-1 bg-yellow-100 text-yellow-700 rounded-lg text-sm font-bold mb-4 animate-pulse">💸 عرض التوفير</span>
+                    <h3 class="text-2xl font-bold text-[#0B1536] mb-3 group-hover:text-yellow-600 transition-colors">اطلب بـ 200 جنيه والتوصيل مجاناً!</h3>
+                    <p class="text-gray-500 mb-6 leading-relaxed">لو إجمالي حساب أوردراتك تخطى الـ 500 جنيه، هتستمتع بـ <span class="font-bold text-[#0B1536] bg-gray-100 px-2 py-1 rounded border border-gray-200">توصيل مجاني</span> لأي مكان أو خصم خاص على حسابك.</p>
                 </div>
                 <div class="relative z-10 w-32 h-32 shrink-0 bg-yellow-50 rounded-2xl flex items-center justify-center border border-yellow-100 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500 shadow-inner">
-                    <span class="text-5xl drop-shadow-md">🍔</span>
+                    <span class="text-5xl drop-shadow-md">🛵</span>
                 </div>
             </div>
         </div>
@@ -148,14 +148,14 @@
             @endforeach
             
             <!-- Service: Corporate -->
-            <a href="tel:01097752649" data-aos="fade-up" data-aos-delay="600" class="group bg-[#FAFAFA] rounded-[24px] p-8 border border-dashed border-gray-300 hover:border-gray-400 hover:bg-gray-100 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-pointer block">
+            <a href="{{ $settings['whatsapp_link'] ?? 'https://wa.me/+201130424003' }}" target="_blank" data-aos="fade-up" data-aos-delay="600" class="group bg-[#FAFAFA] rounded-[24px] p-8 border border-dashed border-gray-300 hover:border-gray-400 hover:bg-gray-100 transition-all duration-300 flex flex-col items-center justify-center text-center cursor-pointer block">
                 <div class="w-16 h-16 mb-4 rounded-full bg-white flex items-center justify-center text-gray-400 group-hover:scale-110 group-hover:text-gray-700 transition-all duration-300 shadow-sm">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                 </div>
                 <h3 class="text-xl font-bold text-[#0B1536] mb-2">خدمات للشركات؟</h3>
                 <p class="text-gray-500 text-sm mb-5">نوفر حلول لوجستية وتوصيل مخصصة لأصحاب المتاجر والمطاعم بأسعار خاصة.</p>
                 <div class="px-6 py-2 bg-white border border-gray-200 text-gray-700 rounded-xl font-bold group-hover:bg-gray-800 group-hover:text-white transition-colors duration-300 shadow-sm">
-                    تواصل معنا
+                    تواصل معنا عبر واتساب
                 </div>
             </a>
         </div>

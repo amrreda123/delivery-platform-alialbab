@@ -114,7 +114,9 @@ class OrderService
         $message .= "الطلبات والملاحظات:\n" . $data['notes'] . "\n";
         $message .= "----------------------\n";
         $message .= "العنوان: " . $fullDropoffAddress . "\n";
-        $message .= "رقم الطلب: #" . $order->id;
+        $message .= "رقم الطلب: #" . $order->id . "\n";
+        $message .= "كود التتبع: " . $order->tracking_code . "\n";
+        $message .= "(احتفظ بكود التتبع لإنشاء حساب واسترجاع طلباتك لاحقاً)";
 
         $whatsappNumber = "201140382833";
         return "https://wa.me/" . $whatsappNumber . "?text=" . urlencode($message);

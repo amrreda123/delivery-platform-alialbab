@@ -40,13 +40,29 @@
 
     <!-- Left: Actions & Mobile Toggle -->
     <div class="flex items-center gap-3 md:gap-6">
-        <a href="{{ route('admin.dashboard') }}" 
-           class="hidden md:flex font-semibold text-gray-600 hover:text-[#FFC107] transition items-center gap-2 text-sm">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
-            </svg>
-            لوحة التحكم
-        </a>
+        @auth
+            @if(auth()->user()->role === 'admin')
+                <a href="{{ route('admin.dashboard') }}" 
+                   class="flex font-semibold text-gray-600 hover:text-[#FFC107] transition items-center gap-1 md:gap-2 text-sm">
+                    <svg class="w-6 h-6 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                    </svg>
+                    <span class="hidden md:block">لوحة التحكم</span>
+                </a>
+            @endif
+        @else
+            <!-- Dropdown for Login on Desktop -->
+            <div class="relative group hidden md:block">
+                <button class="flex items-center gap-1 font-semibold text-gray-600 hover:text-[#FFC107] transition text-sm py-2">
+                    تسجيل الدخول
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="absolute left-0 top-full mt-1 w-40 bg-white rounded-xl shadow-lg py-2 border border-gray-100 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                    <a href="{{ route('customer.login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#FFC107]">دخول العملاء</a>
+                    <a href="{{ route('admin.login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#FFC107]">دخول الإدارة</a>
+                </div>
+            </div>
+        @endauth
         <button onclick="document.getElementById('app-modal').classList.remove('hidden')"
                 class="bg-[#FFC107] text-[#0B1536] px-4 md:px-6 py-2 md:py-2.5 rounded-xl font-bold shadow-md hover:bg-yellow-500 transition flex items-center gap-2 text-sm md:text-base">
             <svg class="hidden md:block w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
@@ -77,11 +93,24 @@
         <li><a href="{{ route('faq') }}" class="block w-full py-2 {{ request()->routeIs('faq') ? 'text-[#FFC107]' : 'hover:text-[#FFC107]' }}">الأسئلة الشائعة</a></li>
         <li><a href="{{ route('contact') }}" class="block w-full py-2 {{ request()->routeIs('contact') ? 'text-[#FFC107]' : 'hover:text-[#FFC107]' }}">تواصل معنا</a></li>
     </ul>
-    <div class="p-6 border-t border-gray-100">
-        <a href="{{ route('admin.dashboard') }}" class="flex items-center justify-center gap-2 w-full py-3 bg-gray-50 text-gray-700 rounded-xl font-bold hover:bg-gray-100">
-            لوحة التحكم
-        </a>
-    </div>
+    @auth
+        @if(auth()->user()->role === 'admin')
+            <div class="p-6 border-t border-gray-100">
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center justify-center gap-2 w-full py-3 bg-gray-50 text-gray-700 rounded-xl font-bold hover:bg-gray-100">
+                    لوحة التحكم
+                </a>
+            </div>
+        @endif
+    @else
+        <div class="p-6 border-t border-gray-100 flex flex-col gap-3">
+            <a href="{{ route('customer.login') }}" class="flex items-center justify-center gap-2 w-full py-3 bg-gray-50 text-gray-700 rounded-xl font-bold hover:bg-gray-100">
+                دخول العملاء
+            </a>
+            <a href="{{ route('admin.login') }}" class="flex items-center justify-center gap-2 w-full py-3 bg-gray-50 text-gray-700 rounded-xl font-bold hover:bg-gray-100">
+                دخول الإدارة
+            </a>
+        </div>
+    @endauth
 </div>
 
 <!-- Modal: Not Available Yet -->

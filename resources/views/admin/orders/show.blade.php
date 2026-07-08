@@ -8,37 +8,47 @@
 <style type="text/css" media="print">
     @page { margin: 1cm; }
     body * { visibility: hidden; }
-    #invoice-preview-container, #invoice-preview-container * { visibility: visible; }
-    #invoice-preview-container {
+    
+    /* Show only the print-invoice element and its children */
+    #print-invoice, #print-invoice * { 
+        visibility: visible; 
+    }
+    
+    #print-invoice {
         position: absolute;
         left: 0;
         top: 0;
         right: 0;
         width: 100%;
         margin: 0;
-        padding: 0;
-        box-shadow: none !important;
-        border: none !important;
-        background: transparent !important;
-        display: flex;
-        justify-content: center;
+        padding: 20px;
+        background: white !important;
+        color: black !important;
+        font-family: Arial, sans-serif;
+        direction: rtl;
     }
-    #invoice-preview-container h3, 
-    .print-hidden { display: none !important; }
 
-    /* Keep the WhatsApp look, but perfectly centered like a mobile screen */
-    #invoice-preview-container > div.bg-\[\#EFEAE2\] {
-        width: 100% !important;
-        max-width: 450px !important;
-        margin: 0 auto !important;
-        border: 1px solid #ddd !important;
-        border-radius: 16px !important;
+    /* Professional Black & White styling */
+    #print-invoice table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    #print-invoice th, #print-invoice td {
+        border: 1px solid #000;
+        padding: 10px;
+        text-align: right;
+    }
+    #print-invoice th {
+        background-color: #f0f0f0 !important;
+        -webkit-print-color-adjust: exact;
+    }
+    #print-invoice h1, #print-invoice h2, #print-invoice h3, #print-invoice p {
+        color: #000 !important;
+        margin: 5px 0;
     }
     
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
+    .print-hidden { display: none !important; }
 </style>
 
 @php
@@ -91,6 +101,11 @@
                     <span class="text-sm font-bold text-gray-800">
                         {{ $order->order_type == 'store_order' ? 'طلب من متجر' : 'طلب خاص / منوع' }}
                     </span>
+                </div>
+
+                <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+                    <span class="text-sm font-semibold text-gray-500">كود التتبع</span>
+                    <span class="text-sm font-mono font-bold text-gray-800" dir="ltr">{{ $order->tracking_code }}</span>
                 </div>
 
                 @if($order->order_type == 'store_order' && $order->store)
@@ -231,4 +246,59 @@
     </div>
 
 </div>
+
+<!-- Printable Invoice Container (Hidden on screen) -->
+<div id="print-invoice" class="hidden">
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="font-size: 24px; font-weight: bold; margin-bottom: 5px;">فاتورة طلب - علي الباب</h1>
+        <p>رقم الطلب: #{{ $order->id }}</p>
+        <p>تاريخ الطلب: {{ $order->created_at->format('Y-m-d h:i A') }}</p>
+    </div>
+
+    <table>
+        <tr>
+            <th width="30%">بيانات العميل</th>
+            <td width="70%">
+                الاسم: {{ $order->customer->name ?? 'غير متوفر' }}<br>
+                الهاتف: <span dir="ltr">{{ $order->customer->phone ?? 'غير متوفر' }}</span><br>
+                العنوان: {{ $order->dropoff_address }}
+            </td>
+        </tr>
+        <tr>
+            <th>بيانات الطلب</th>
+            <td>
+                النوع: {{ $order->order_type == 'store_order' ? 'طلب من متجر' : 'طلب خاص / منوع' }}<br>
+                @if($order->order_type == 'store_order' && $order->store)
+                المتجر: {{ $order->store->name }}<br>
+                @elseif($order->order_type == 'custom_order')
+                الاستلام من: {{ $order->pickup_address }}<br>
+                @endif
+                كود التتبع: <span dir="ltr">{{ $order->tracking_code }}</span>
+            </td>
+        </tr>
+        <tr>
+            <th>الطلبات والملاحظات</th>
+            <td style="white-space: pre-line;">{{ $order->notes }}</td>
+        </tr>
+        <tr>
+            <th>تفاصيل الحساب</th>
+            <td>
+                قيمة الطلب: {{ number_format($order->items_total, 2) }} ج.م<br>
+                مصاريف الشحن: {{ number_format($order->delivery_fee, 2) }} ج.م<br>
+                <strong>الإجمالي المطلوب: {{ number_format($order->total_amount, 2) }} ج.م</strong>
+            </td>
+        </tr>
+        @if($order->driver)
+        <tr>
+            <th>بيانات المندوب</th>
+            <td>الاسم: {{ $order->driver->name }} ({{ $order->driver->phone }})</td>
+        </tr>
+        @endif
+    </table>
+
+    <div style="margin-top: 40px; text-align: center; font-size: 14px;">
+        <p>شكرًا لاختيارك علي الباب... كل طلباتك لحد باب بيتك</p>
+    </div>
+</div>
+
 @endsection

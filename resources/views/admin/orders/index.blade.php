@@ -26,7 +26,10 @@
             <tbody class="divide-y divide-gray-50">
                 @forelse($orders as $order)
                 <tr class="hover:bg-gray-50/50 transition-colors">
-                    <td class="px-4 py-3 text-sm font-bold text-[#0B1536]">#{{ $order->id }}</td>
+                    <td class="px-4 py-3">
+                        <div class="text-sm font-bold text-[#0B1536]">#{{ $order->id }}</div>
+                        <div class="text-xs text-gray-500 mt-1 font-mono" dir="ltr" title="كود التتبع">{{ $order->tracking_code }}</div>
+                    </td>
                     <td class="px-4 py-3">
                         <div class="text-sm font-semibold text-gray-800">{{ $order->customer->name ?? 'غير معروف' }}</div>
                         <div class="text-xs text-gray-500">{{ $order->customer->phone ?? '' }}</div>
