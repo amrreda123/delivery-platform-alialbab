@@ -32,14 +32,11 @@
                 @enderror
             </div>
 
-            <!-- Email Input -->
+            <!-- Email Input (Readonly) -->
             <div>
-                <label for="email" class="block text-sm font-bold text-gray-700 mb-2">البريد الإلكتروني</label>
-                <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required
-                       class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#FFC107] focus:ring-2 focus:ring-[#FFC107]/20 outline-none transition text-sm font-bold @error('email') border-red-500 @enderror">
-                @error('email')
-                    <p class="text-red-500 text-xs mt-2 font-bold">{{ $message }}</p>
-                @enderror
+                <label for="email" class="block text-sm font-bold text-gray-700 mb-2">البريد الإلكتروني <span class="text-xs text-gray-400 font-normal">(لا يمكن تغييره)</span></label>
+                <input type="email" id="email" value="{{ $user->email }}" readonly disabled
+                       class="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 text-gray-500 outline-none text-sm font-bold cursor-not-allowed">
             </div>
 
             <!-- Phone Input (Readonly) -->

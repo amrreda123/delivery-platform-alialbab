@@ -41,12 +41,10 @@ class CustomerProfileController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:50|min:3',
-            'email' => 'required|string|email:rfc,dns|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8|confirmed',
         ]);
 
         $user->name = $request->name;
-        $user->email = $request->email;
 
         if ($request->filled('password')) {
             $user->password = \Illuminate\Support\Facades\Hash::make($request->password);
