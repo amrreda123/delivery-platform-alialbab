@@ -28,7 +28,7 @@ class CustomerLoginRequest extends FormRequest
                 'string', 
                 'email:rfc,dns',
                 Rule::exists('users', 'email')->where(function ($query) {
-                    $query->where('role', 'customer');
+                    $query->whereIn('role', ['customer', 'driver']);
                 })
             ],
             'password' => ['required', 'string', 'min:8'],
@@ -43,7 +43,7 @@ class CustomerLoginRequest extends FormRequest
         return [
             'email.required' => 'البريد الإلكتروني مطلوب.',
             'email.email' => 'يجب إدخال بريد إلكتروني صالح.',
-            'email.exists' => 'هذا الحساب غير موجود أو غير مصرح له بالدخول كعميل.',
+            'email.exists' => 'هذا الحساب غير موجود أو غير مصرح لك بالدخول من هنا.',
             'password.required' => 'كلمة المرور مطلوبة.',
             'password.min' => 'كلمة المرور غير صحيحة.',
         ];

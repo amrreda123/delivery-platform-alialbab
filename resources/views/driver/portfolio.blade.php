@@ -72,18 +72,36 @@
                         </div>
                     </div>
                     
-                    <!-- Status Badge -->
-                    @if($order->status == 'pending')
-                        <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1.5 rounded-lg">قيد الانتظار</span>
-                    @elseif($order->status == 'processing')
-                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5 rounded-lg">قيد التجهيز</span>
-                    @elseif($order->status == 'delivering')
-                        <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1.5 rounded-lg border border-purple-200">جاري التوصيل</span>
-                    @elseif($order->status == 'delivered')
-                        <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1.5 rounded-lg">مكتمل</span>
-                    @elseif($order->status == 'cancelled')
-                        <span class="bg-red-100 text-red-800 text-xs font-bold px-3 py-1.5 rounded-lg">ملغي</span>
-                    @endif
+                    <!-- Status Badge and Update Form -->
+                    <div class="flex flex-col items-end gap-2">
+                        @if($order->status == 'pending')
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1.5 rounded-lg">قيد الانتظار</span>
+                        @elseif($order->status == 'processing')
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5 rounded-lg">قيد التجهيز</span>
+                        @elseif($order->status == 'delivering')
+                            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1.5 rounded-lg border border-purple-200">جاري التوصيل</span>
+                        @elseif($order->status == 'delivered')
+                            <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1.5 rounded-lg">مكتمل</span>
+                        @elseif($order->status == 'cancelled')
+                            <span class="bg-red-100 text-red-800 text-xs font-bold px-3 py-1.5 rounded-lg">ملغي</span>
+                        @endif
+
+                        <!-- Driver Status Update Form -->
+                        @if($order->status !== 'delivered' && $order->status !== 'cancelled')
+                        <form action="{{ route('driver.portfolio.update-status', $order->id) }}" method="POST" class="flex items-center gap-1 mt-1">
+                            @csrf
+                            @method('PUT')
+                            <select name="status" class="text-xs bg-gray-50 border border-gray-200 rounded-lg px-2 py-1 font-bold text-gray-700 outline-none focus:border-[#FFC107]">
+                                <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>قيد التجهيز</option>
+                                <option value="delivering" {{ $order->status == 'delivering' ? 'selected' : '' }}>جاري التوصيل</option>
+                                <option value="delivered">مكتمل (تم التوصيل)</option>
+                            </select>
+                            <button type="submit" class="bg-[#0B1536] text-white p-1 rounded-lg hover:bg-gray-800 transition">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </button>
+                        </form>
+                        @endif
+                    </div>
                 </div>
 
                 <hr class="border-gray-50 my-4">
@@ -93,8 +111,8 @@
                     <div class="flex items-start gap-3">
                         <svg class="w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         <div>
-                            <p class="text-sm font-semibold text-gray-700">العميل: {{ $order->customer_name }}</p>
-                            <p class="text-xs font-bold text-[#FFC107]">{{ $order->customer_phone }}</p>
+                            <p class="text-sm font-semibold text-gray-700">العميل: {{ $order->customer->name ?? 'غير متوفر' }}</p>
+                            <p class="text-xs font-bold text-[#FFC107]">{{ $order->customer->phone ?? 'غير متوفر' }}</p>
                         </div>
                     </div>
 
@@ -103,8 +121,8 @@
                         <svg class="w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         <div>
                             <p class="text-sm text-gray-600 font-medium">{{ $order->dropoff_address }}</p>
-                            @if($order->dropoff_notes)
-                                <p class="text-xs text-red-500 mt-1 font-bold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> ملاحظات: {{ $order->dropoff_notes }}</p>
+                            @if($order->notes)
+                                <p class="text-xs text-red-500 mt-1 font-bold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> ملاحظات: {{ $order->notes }}</p>
                             @endif
                         </div>
                     </div>
@@ -113,7 +131,7 @@
                 <div class="bg-gray-50 rounded-2xl p-4 flex items-center justify-between">
                     <div>
                         <p class="text-xs text-gray-500 font-bold mb-1">المبلغ المطلوب تحصيله (الإجمالي)</p>
-                        <p class="text-lg font-black text-[#0B1536]">{{ number_format($order->total_price, 2) }} ج.م</p>
+                        <p class="text-lg font-black text-[#0B1536]">{{ number_format($order->total_amount, 2) }} ج.م</p>
                     </div>
                     <div class="text-right">
                         <p class="text-xs text-gray-500 font-bold mb-1">رسوم التوصيل (نصيبك)</p>

@@ -30,4 +30,27 @@ class DriverPortfolioController extends Controller
 
         return view('driver.portfolio', compact('orders', 'user', 'totalAssigned', 'totalDelivered', 'totalEarnings'));
     }
+
+    public function updateStatus(Request $request, Order $order)
+    {
+        $user = Auth::user();
+
+        // Ensure only drivers can access this
+        if ($user->role !== 'driver') {
+            abort(403, 'Unauthorized action.');
+        }
+
+        // Ensure the driver is assigned to this order
+        if ($order->driver_id !== $user->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $request->validate([
+            'status' => 'required|in:pending,processing,delivering,delivered,cancelled'
+        ]);
+
+        $order->update(['status' => $request->status]);
+
+        return back()->with('success', 'تم تحديث حالة الطلب بنجاح.');
+    }
 }

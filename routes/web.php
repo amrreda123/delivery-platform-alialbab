@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
 
     // Driver Portfolio
     Route::get('/driver/portfolio', [\App\Http\Controllers\DriverPortfolioController::class, 'index'])->name('driver.portfolio');
+    Route::put('/driver/portfolio/orders/{order}/status', [\App\Http\Controllers\DriverPortfolioController::class, 'updateStatus'])->name('driver.portfolio.update-status');
 });
 
 Route::get('/category/{category}/order', [OrderController::class, 'create'])->name('order.create');
