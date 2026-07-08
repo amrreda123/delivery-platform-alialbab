@@ -49,6 +49,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/driver/portfolio', [DriverPortfolioController::class, 'index'])->name('driver.portfolio');
         Route::put('/driver/portfolio/orders/{order}/status', [DriverPortfolioController::class, 'updateStatus'])->name('driver.portfolio.update-status');
         Route::get('/driver/portfolio/orders/{order}/print', [DriverPortfolioController::class, 'printOrder'])->name('driver.portfolio.print-order');
+        
+        Route::get('/driver/settings', [DriverPortfolioController::class, 'settings'])->name('driver.settings');
+        Route::put('/driver/settings', [DriverPortfolioController::class, 'updateSettings'])->name('driver.settings.update');
     });
 });
 

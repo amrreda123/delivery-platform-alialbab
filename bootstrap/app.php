@@ -5,6 +5,8 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsCustomer;
+use App\Http\Middleware\IsDriver;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -18,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'is_admin' => IsAdmin::class,
             'is_customer' => IsCustomer::class,
-            'is_driver' => \App\Http\Middleware\IsDriver::class,
+            'is_driver' => IsDriver::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

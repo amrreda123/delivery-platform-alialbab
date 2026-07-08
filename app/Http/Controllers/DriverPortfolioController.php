@@ -70,4 +70,40 @@ class DriverPortfolioController extends Controller
 
         return view('driver.print', compact('order'));
     }
+
+    public function settings()
+    {
+        $user = Auth::user();
+        return view('driver.settings', compact('user'));
+    }
+
+    public function updateSettings(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'name' => 'required|string|max:50|min:3',
+            'password' => 'nullable|string|min:8|confirmed',
+            'vehicle_type' => 'required|in:motorcycle,car,bicycle,van',
+            'is_available' => 'boolean',
+        ]);
+
+        // Update User info
+        $user->name = $request->name;
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->save();
+
+        // Update or Create Driver Profile
+        $user->driverProfile()->updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'vehicle_type' => $request->vehicle_type,
+                'is_available' => $request->boolean('is_available'),
+            ]
+        );
+
+        return back()->with('success', 'تم تحديث بياناتك بنجاح.');
+    }
 }
