@@ -49,6 +49,22 @@
                     </svg>
                     <span class="hidden md:block">لوحة التحكم</span>
                 </a>
+            @elseif(auth()->user()->role === 'driver')
+                <a href="{{ route('driver.portfolio') }}" 
+                   class="flex font-semibold text-[#0B1536] hover:text-[#FFC107] transition items-center gap-1 md:gap-2 text-sm">
+                    <svg class="w-6 h-6 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <span class="hidden md:block">بوابة المندوب</span>
+                </a>
+            @else
+                <a href="{{ route('profile') }}" 
+                   class="flex font-semibold text-[#0B1536] hover:text-[#FFC107] transition items-center gap-1 md:gap-2 text-sm">
+                    <svg class="w-6 h-6 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    <span class="hidden md:block">حسابي</span>
+                </a>
             @endif
         @else
             <!-- Dropdown for Login on Desktop -->
@@ -98,6 +114,18 @@
             <div class="p-6 border-t border-gray-100">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center justify-center gap-2 w-full py-3 bg-gray-50 text-gray-700 rounded-xl font-bold hover:bg-gray-100">
                     لوحة التحكم
+                </a>
+            </div>
+        @elseif(auth()->user()->role === 'driver')
+            <div class="p-6 border-t border-gray-100">
+                <a href="{{ route('driver.portfolio') }}" class="flex items-center justify-center gap-2 w-full py-3 bg-gray-50 text-gray-700 rounded-xl font-bold hover:bg-gray-100">
+                    بوابة المندوب
+                </a>
+            </div>
+        @else
+            <div class="p-6 border-t border-gray-100">
+                <a href="{{ route('profile') }}" class="flex items-center justify-center gap-2 w-full py-3 bg-gray-50 text-gray-700 rounded-xl font-bold hover:bg-gray-100">
+                    حسابي
                 </a>
             </div>
         @endif

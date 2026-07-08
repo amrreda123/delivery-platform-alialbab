@@ -34,11 +34,14 @@ Route::get('/register', [CustomerAuthController::class, 'showRegister'])->name('
 Route::post('/register', [CustomerAuthController::class, 'register'])->name('customer.register.post')->middleware('throttle:5,1');
 Route::post('/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
 
-// Customer Profile / Orders
+// Customer & Driver Profile / Orders
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [CustomerProfileController::class, 'index'])->name('profile');
     Route::get('/profile/settings', [CustomerProfileController::class, 'settings'])->name('profile.settings');
     Route::put('/profile/settings', [CustomerProfileController::class, 'updateSettings'])->name('profile.settings.update');
+
+    // Driver Portfolio
+    Route::get('/driver/portfolio', [\App\Http\Controllers\DriverPortfolioController::class, 'index'])->name('driver.portfolio');
 });
 
 Route::get('/category/{category}/order', [OrderController::class, 'create'])->name('order.create');
